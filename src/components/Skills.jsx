@@ -35,6 +35,8 @@ const Skills = () => {
     { name: 'SQL Server', category: 'backend', icon: Database, desc: 'Microsoft relational database engine' },
 
     // Tools & Databases
+    { name: 'Docker', category: 'tools', icon: Cpu, desc: 'Containerization & application deployment' },
+    { name: 'Azure', category: 'tools', icon: Server, desc: 'Microsoft cloud platform & services' },
     { name: 'Supabase', category: 'tools', icon: Database, desc: 'Backend-as-a-Service using PostgreSQL' },
     { name: 'Roboflow', category: 'tools', icon: Cpu, desc: 'Computer vision dataset management' },
     { name: 'YOLO', category: 'tools', icon: Cpu, desc: 'Real-time object detection models' },
