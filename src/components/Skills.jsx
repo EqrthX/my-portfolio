@@ -2,53 +2,54 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Code, Layout, Server, Database, Wrench, Users, 
-  Cpu, Sparkles 
+  Cpu
 } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const Skills = () => {
   const [activeTab, setActiveTab] = useState('all')
+  const { t } = useLanguage()
 
   const skillCategories = [
-    { id: 'all', label: 'All Skills' },
+    { id: 'all', label: t('ทักษะทั้งหมด', 'All Skills') },
     { id: 'frontend', label: 'Front-End' },
     { id: 'backend', label: 'Back-End' },
-    { id: 'tools', label: 'Tools & DB' },
-    { id: 'soft', label: 'Soft Skills' },
+    { id: 'tools', label: t('เครื่องมือ & DB', 'Tools & DB') },
+    { id: 'soft', label: t('ซอฟต์สกิล', 'Soft Skills') },
   ]
 
   const skillsData = [
     // Frontend
-    { name: 'HTML5', category: 'frontend', icon: Layout, desc: 'Semantic Structure & Accessibility' },
-    { name: 'CSS3 / Tailwind CSS', category: 'frontend', icon: Layout, desc: 'Responsive Design & Custom Styling' },
-    { name: 'JavaScript (ES6+)', category: 'frontend', icon: Code, desc: 'Modern JS Syntax & Async Operations' },
-    { name: 'React', category: 'frontend', icon: Code, desc: 'Hooks, Component Lifecycle & Router' },
-    { name: 'Bootstrap', category: 'frontend', icon: Layout, desc: 'Rapid Grid UI Layouts' },
+    { name: 'HTML5', category: 'frontend', icon: Layout, desc: t('โครงสร้างเว็บ & การเข้าถึงข้อมูล', 'Semantic Structure & Accessibility') },
+    { name: 'CSS3 / Tailwind CSS', category: 'frontend', icon: Layout, desc: t('การออกแบบที่รองรับทุกหน้าจอ & สไตล์คัสตอม', 'Responsive Design & Custom Styling') },
+    { name: 'JavaScript (ES6+)', category: 'frontend', icon: Code, desc: t('ไวยากรณ์ JS สมัยใหม่ & การทำงานแบบอะซิงโครนัส', 'Modern JS Syntax & Async Operations') },
+    { name: 'React', category: 'frontend', icon: Code, desc: t('เบ็ดเตล็ด, วัฏจักรคอมโพเนนต์ & ระบบเราเตอร์', 'Hooks, Component Lifecycle & Router') },
+    { name: 'Bootstrap', category: 'frontend', icon: Layout, desc: t('การจัดวาง Grid UI อย่างรวดเร็ว', 'Rapid Grid UI Layouts') },
 
     // Backend
-    { name: 'C#', category: 'backend', icon: Code, desc: 'Object-oriented application building' },
-    { name: '.NET', category: 'backend', icon: Server, desc: 'Enterprise server backend framework' },
-    { name: 'Python', category: 'backend', icon: Code, desc: 'Scripting, backend, and data science' },
-    { name: 'Node.js & Express', category: 'backend', icon: Server, desc: 'RESTful API Development & Middleware' },
-    { name: 'FastAPI', category: 'backend', icon: Server, desc: 'High-performance modern Python API framework' },
-    { name: 'PHP', category: 'backend', icon: Server, desc: 'Server-side Scripting & Full-Stack Projects' },
-    { name: 'MySQL', category: 'backend', icon: Database, desc: 'Database Schema Design & Querying' },
-    { name: 'SQL Server', category: 'backend', icon: Database, desc: 'Microsoft relational database engine' },
+    { name: 'C#', category: 'backend', icon: Code, desc: t('การสร้างแอปพลิเคชันเชิงวัตถุ (OOP)', 'Object-oriented application building') },
+    { name: '.NET', category: 'backend', icon: Server, desc: t('เฟรมเวิร์กเซิร์ฟเวอร์หลังบ้านระดับองค์กร', 'Enterprise server backend framework') },
+    { name: 'Python', category: 'backend', icon: Code, desc: t('การเขียนสคริปต์, ระบบหลังบ้าน และวิทยาการข้อมูล', 'Scripting, backend, and data science') },
+    { name: 'Node.js & Express', category: 'backend', icon: Server, desc: t('การพัฒนา RESTful API & มิดเดิลแวร์', 'RESTful API Development & Middleware') },
+    { name: 'FastAPI', category: 'backend', icon: Server, desc: t('เฟรมเวิร์ก API ด้วย Python สมัยใหม่ประสิทธิภาพสูง', 'High-performance modern Python API framework') },
+    { name: 'MySQL', category: 'backend', icon: Database, desc: t('การออกแบบโครงสร้างฐานข้อมูล & การคิวรีข้อมูล', 'Database Schema Design & Querying') },
+    { name: 'SQL Server', category: 'backend', icon: Database, desc: t('ระบบฐานข้อมูลเชิงสัมพันธ์ของ Microsoft', 'Microsoft relational database engine') },
 
     // Tools & Databases
-    { name: 'Docker', category: 'tools', icon: Cpu, desc: 'Containerization & application deployment' },
-    { name: 'Azure', category: 'tools', icon: Server, desc: 'Microsoft cloud platform & services' },
-    { name: 'Supabase', category: 'tools', icon: Database, desc: 'Backend-as-a-Service using PostgreSQL' },
-    { name: 'Roboflow', category: 'tools', icon: Cpu, desc: 'Computer vision dataset management' },
-    { name: 'YOLO', category: 'tools', icon: Cpu, desc: 'Real-time object detection models' },
-    { name: 'Git & GitHub', category: 'tools', icon: Wrench, desc: 'Version Control & Code Repositories' },
-    { name: 'Postman', category: 'tools', icon: Wrench, desc: 'API Testing & Documentation' },
-    { name: 'VS Code', category: 'tools', icon: Wrench, desc: 'Development Environment & Extensions' },
-    { name: 'XAMPP', category: 'tools', icon: Wrench, desc: 'Local Apache & MariaDB Server' },
+    { name: 'Docker', category: 'tools', icon: Cpu, desc: t('การจำลองตู้คอนเทนเนอร์ & การติดตั้งแอปพลิเคชัน', 'Containerization & application deployment') },
+    { name: 'Azure', category: 'tools', icon: Server, desc: t('แพลตฟอร์มคลาวด์และบริการของ Microsoft', 'Microsoft cloud platform & services') },
+    { name: 'Supabase', category: 'tools', icon: Database, desc: t('บริการระบบหลังบ้านสำเร็จรูปด้วย PostgreSQL', 'Backend-as-a-Service using PostgreSQL') },
+    { name: 'Roboflow', category: 'tools', icon: Cpu, desc: t('การจัดการชุดข้อมูลสำหรับคอมพิวเตอร์วิทัศน์', 'Computer vision dataset management') },
+    { name: 'YOLO', category: 'tools', icon: Cpu, desc: t('โมเดลตรวจจับวัตถุแบบเรียลไทม์', 'Real-time object detection models') },
+    { name: 'Git & GitHub', category: 'tools', icon: Wrench, desc: t('ระบบควบคุมเวอร์ชัน & แหล่งเก็บโค้ด', 'Version Control & Code Repositories') },
+    { name: 'Postman', category: 'tools', icon: Wrench, desc: t('การทดสอบ API & การทำเอกสารประกอบ', 'API Testing & Documentation') },
+    { name: 'VS Code', category: 'tools', icon: Wrench, desc: t('สภาพแวดล้อมการพัฒนา & ส่วนขยาย', 'Development Environment & Extensions') },
+    { name: 'XAMPP', category: 'tools', icon: Wrench, desc: t('เซิร์ฟเวอร์จำลอง Apache & MariaDB ภายในเครื่อง', 'Local Apache & MariaDB Server') },
 
     // Soft Skills
-    { name: 'Problem-solving', category: 'soft', icon: Users, desc: 'Debugging & Algorithm Logic' },
-    { name: 'Teamwork & Collaboration', category: 'soft', icon: Users, desc: 'Effective Communication in Projects' },
-    { name: 'Time Management', category: 'soft', icon: Users, desc: 'Task Prioritization & Deadlines' },
+    { name: t('การแก้ปัญหา', 'Problem-solving'), category: 'soft', icon: Users, desc: t('การดีบักโค้ด & ลอจิกอัลกอริทึม', 'Debugging & Algorithm Logic') },
+    { name: t('การทำงานเป็นทีม', 'Teamwork & Collaboration'), category: 'soft', icon: Users, desc: t('การสื่อสารอย่างมีประสิทธิภาพในการทำงานร่วมกัน', 'Effective Communication in Projects') },
+    { name: t('การบริหารเวลา', 'Time Management'), category: 'soft', icon: Users, desc: t('การจัดลำดับความสำคัญของงาน & การส่งงานตรงเวลา', 'Task Prioritization & Deadlines') },
   ]
 
   const filteredSkills = activeTab === 'all' 
@@ -66,14 +67,14 @@ const Skills = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-semibold uppercase tracking-widest mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            Capabilities & Tech Stack
+            <Cpu className="w-3.5 h-3.5" />
+            {t('ความสามารถ & เทคโนโลยี', 'Capabilities & Tech Stack')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4">
-            Skills & <span className="text-gradient">Technologies</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-white">
+            {t('ทักษะ & ', 'Skills & ')}<span className="text-gradient">{t('เทคโนโลยีที่ใช้', 'Technologies')}</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg font-light">
-            Tools, frameworks, and methodologies I leverage to build robust software applications.
+            {t('เครื่องมือ เฟรมเวิร์ก และระเบียบวิธีที่ผมเลือกใช้เพื่อสร้างแอปพลิเคชันที่มีประสิทธิภาพ', 'Tools, frameworks, and methodologies I leverage to build robust software applications.')}
           </p>
         </div>
 

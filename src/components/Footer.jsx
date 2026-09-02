@@ -1,10 +1,21 @@
 import { Link, animateScroll as scroll } from 'react-scroll'
-import { Code2, Github, Facebook, Mail, ArrowUp, Heart } from 'lucide-react'
+import { Code2, Github, Facebook, Mail, ArrowUp } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const Footer = () => {
+  const { t } = useLanguage()
+
   const scrollToTop = () => {
     scroll.scrollToTop()
   }
+
+  const navLinks = [
+    { target: 'home', label: t('หน้าแรก', 'Home') },
+    { target: 'skills', label: t('ทักษะ', 'Skills') },
+    { target: 'projects', label: t('ผลงาน', 'Projects') },
+    { target: 'timeline', label: t('เส้นทาง', 'Journey') },
+    { target: 'contact', label: t('ติดต่อ', 'Contact') },
+  ]
 
   return (
     <footer className="relative bg-[#070A10] border-t border-slate-800/80 text-slate-400 py-12">
@@ -21,22 +32,22 @@ const Footer = () => {
             </div>
             <div>
               <span className="text-lg font-bold font-heading text-white">Nontprawitch Saetang</span>
-              <p className="text-xs text-slate-500">Full-Stack Developer Portfolio</p>
+              <p className="text-xs text-slate-500">{t('พอร์ตโฟลิโอสำหรับนักพัฒนา Full-Stack', 'Full-Stack Developer Portfolio')}</p>
             </div>
           </div>
 
           {/* Nav Links */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold uppercase tracking-wider">
-            {['home', 'skills', 'projects', 'timeline', 'contact'].map((item) => (
+            {navLinks.map((item) => (
               <Link
-                key={item}
-                to={item}
+                key={item.target}
+                to={item.target}
                 smooth={true}
                 duration={500}
                 offset={-80}
                 className="hover:text-cyan-400 transition-colors cursor-pointer"
               >
-                {item}
+                {item.label}
               </Link>
             ))}
           </div>
@@ -74,21 +85,26 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light">
-          <p>© {new Date().getFullYear()} Nontprawitch Saetang (Earth). All rights reserved.</p>
+          <p>
+            {t(
+              `© ${new Date().getFullYear()} นนท์ประวิชญ์ แซ่ตั้ง (เอิร์ธ). สงวนลิขสิทธิ์ทั้งหมด`,
+              `© ${new Date().getFullYear()} Nontprawitch Saetang (Earth). All rights reserved.`
+            )}
+          </p>
           
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 text-slate-500">
-              Built with React & Tailwind CSS
+              {t('สร้างด้วย React & Tailwind CSS', 'Built with React & Tailwind CSS')}
             </span>
 
             {/* Back to Top Button */}
             <button
               onClick={scrollToTop}
               className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/30 transition-all flex items-center gap-1 cursor-pointer"
-              title="Back to Top"
+              title={t('กลับขึ้นด้านบน', 'Back to Top')}
             >
               <ArrowUp className="w-4 h-4" />
-              <span className="text-[10px] font-bold uppercase tracking-wider">Top</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider">{t('บนสุด', 'Top')}</span>
             </button>
           </div>
         </div>

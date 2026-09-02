@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
+  assetsInclude: ['**/*.jpe', '**/*.mp4', '**/*.webm', '**/*.mov'],
   plugins: [
     react(),
     tailwindcss()
