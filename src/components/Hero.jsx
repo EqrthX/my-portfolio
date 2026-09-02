@@ -33,21 +33,21 @@ const Hero = () => {
             </div>
 
             {/* Main Greeting & Name */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-heading tracking-tight leading-[1.1] mb-4 text-white">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-heading tracking-tight leading-[1.1] mb-4 text-slate-900 dark:text-white">
               {t('สวัสดีครับ ผมชื่อ', "Hello, I'm")} <br className="hidden sm:inline" />
               <span className="text-gradient">{t('นนท์ประวิช', 'Nontprawitch')}</span>
-              <span className="text-slate-400 text-3xl sm:text-5xl lg:text-6xl font-light ml-3 sm:ml-4">{t('(เอิร์ธ)', '(Earth)')}</span>
+              <span className="text-slate-500 dark:text-slate-400 text-3xl sm:text-5xl lg:text-6xl font-light ml-3 sm:ml-4">{t('(เอิร์ธ)', '(Earth)')}</span>
             </h1>
 
             {/* Subtitle / Role */}
-            <h2 className="text-lg sm:text-2xl font-medium text-slate-300 mb-6 flex flex-wrap items-center justify-center lg:justify-start gap-2">
+            <h2 className="text-lg sm:text-2xl font-medium text-slate-700 dark:text-slate-300 mb-6 flex flex-wrap items-center justify-center lg:justify-start gap-2">
               <span>{t('นักพัฒนา Full Stack', 'Full Stack Developer')}</span>
-              <span className="text-cyan-400 font-bold">•</span>
-              <span className="text-slate-400">React & Node.js</span>
+              <span className="text-cyan-500 dark:text-cyan-400 font-bold">•</span>
+              <span className="text-slate-500 dark:text-slate-400">React & Node.js</span>
             </h2>
 
             {/* Brief Bio */}
-            <p className="text-slate-400 text-base sm:text-lg max-w-2xl mb-8 leading-relaxed font-light">
+            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-2xl mb-8 leading-relaxed font-light">
               {t('ผมเป็นบัณฑิตจบใหม่ที่มีความหลงใหลในการพัฒนาเว็บแอปพลิเคชันแบบ Full Stack เรียนรู้ไว ขยันทำงาน พร้อมแก้โจทย์ปัญหาเชิงเทคนิคต่างๆ และชอบเรียนรู้เทคโนโลยีอะไรใหม่ๆเพื่อเพิ่มทักษะใหม่ๆให้ตัวเองอยู่เสมอครับ', "I'm a fresh graduate with a passion for full stack development, fast learning, hard working, problem solving and learning new hark skill")}
             </p>
 
@@ -56,7 +56,7 @@ const Hero = () => {
               {['React', 'Node.js', 'Express', 'C#', '.NET', 'Python', 'FastAPI', 'Tailwind CSS', 'MySQL', 'SQL Server'].map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1 text-xs font-mono font-medium rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-colors"
+                  className="px-3 py-1 text-xs font-mono font-medium rounded-lg bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors"
                 >
                   {tech}
                 </span>

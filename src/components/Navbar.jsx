@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link as ScrollLink, scroller } from 'react-scroll'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Code2, Menu, X, Sparkles, Send } from 'lucide-react'
+import { Code2, Menu, X, Sparkles, Send, Sun, Moon } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
+import { useTheme } from '../context/ThemeContext'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -10,7 +11,8 @@ const Navbar = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { language, toggleLanguage, t } = useLanguage()
-  
+  const { theme, toggleTheme, isDark } = useTheme()
+
   const isHomePage = location.pathname === '/'
 
   useEffect(() => {
@@ -114,6 +116,19 @@ const Navbar = () => {
             <span className={language === 'th' ? 'text-cyan-400 font-extrabold' : 'text-slate-500'}>TH</span>
             <span className="text-slate-700 font-normal">|</span>
             <span className={language === 'en' ? 'text-cyan-400 font-extrabold' : 'text-slate-500'}>EN</span>
+          </button>
+
+          {/* Theme Toggle Button (Dark / Light) */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-slate-900/90 border border-slate-800 text-amber-400 hover:text-amber-300 transition-all cursor-pointer shadow-md select-none hover:scale-105 active:scale-95 flex items-center justify-center"
+            title={isDark ? t('เปลี่ยนเป็นโหมดสว่าง (Light Mode)', 'Switch to Light Mode') : t('เปลี่ยนเป็นโหมดมืด (Dark Mode)', 'Switch to Dark Mode')}
+          >
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-400 animate-spin-slow" />
+            ) : (
+              <Moon className="w-4 h-4 text-indigo-400" />
+            )}
           </button>
 
           {isHomePage ? (

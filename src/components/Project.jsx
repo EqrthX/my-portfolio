@@ -22,10 +22,10 @@ const Project = () => {
             <FolderGit2 className="w-3.5 h-3.5" />
             {t('ผลงานทั้งหมด', 'Portfolio Showcase')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-white">
+          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-slate-900 dark:text-white">
             {t('โปรเจกต์ที่', 'Featured ')}<span className="text-gradient">{t('แนะนำ', 'Projects')}</span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg font-light">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg font-light">
             {t('การรวบรวมผลงานการพัฒนาเว็บแอปพลิเคชัน โมบายแอป และบริการ API หลังบ้านที่ผมเคยสร้างขึ้น', 'A showcase of web applications, mobile projects, and backend API services I have built.')}
           </p>
         </div>
@@ -78,10 +78,10 @@ const Project = () => {
 
                   {/* Body Content */}
                   <div className="p-6">
-                    <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-400 mb-2 block">
+                    <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-500 dark:text-cyan-400 mb-2 block">
                       {project.categoryLabel[language] || project.categoryLabel.en}
                     </span>
-                    <h3 className="text-xl font-bold font-heading text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                    <h3 className="text-xl font-bold font-heading text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
                       {project.title[language] || project.title.en}
                     </h3>
                     <p className="text-slate-400 text-sm font-light leading-relaxed mb-4 line-clamp-3">

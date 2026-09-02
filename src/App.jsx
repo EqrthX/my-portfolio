@@ -37,7 +37,7 @@ function MainLayout() {
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="min-h-screen bg-[#0B0F17] text-slate-100 bg-grid-pattern relative selection:bg-cyan-500/30 selection:text-cyan-200"
+      className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B0F17] text-slate-900 dark:text-slate-100 bg-grid-pattern relative selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300"
     >
       <Navbar />
       <ScrollToTop />

@@ -92,7 +92,7 @@ const Timeline = () => {
             <Sparkles className="w-3.5 h-3.5" />
             {t('เหตุการณ์สำคัญ & ประสบการณ์', 'Milestones & Experience')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-white">
+          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-slate-900 dark:text-white">
             {t('เส้นทางนัก', 'Developer ')}<span className="text-gradient">{t('พัฒนา', 'Journey')}</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg font-light">

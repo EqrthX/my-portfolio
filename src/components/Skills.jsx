@@ -70,7 +70,7 @@ const Skills = () => {
             <Cpu className="w-3.5 h-3.5" />
             {t('ความสามารถ & เทคโนโลยี', 'Capabilities & Tech Stack')}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-white">
+          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-slate-900 dark:text-white">
             {t('ทักษะ & ', 'Skills & ')}<span className="text-gradient">{t('เทคโนโลยีที่ใช้', 'Technologies')}</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg font-light">

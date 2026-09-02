@@ -71,7 +71,7 @@ const Contact = () => {
             <MessageSquare className="w-3.5 h-3.5" />
             {t('มาทำงานร่วมกัน', "Let's Collaborate")}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-white">
+          <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-slate-900 dark:text-white">
             {t('ช่องทางการ', 'Get In ')}<span className="text-gradient">{t('ติดต่อ', 'Touch')}</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg font-light">

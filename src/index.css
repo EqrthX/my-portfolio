@@ -6,6 +6,12 @@
     background-color: #0B0F17;
     color: #F1F5F9;
     overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  html.light-mode body {
+    background-color: #F8FAFC;
+    color: #0F172A;
   }
 
   h1, h2, h3, .font-heading {
@@ -20,9 +26,15 @@
 ::-webkit-scrollbar-track {
   background: #0B0F17;
 }
+html.light-mode ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
 ::-webkit-scrollbar-thumb {
   background: #1E293B;
   border-radius: 4px;
+}
+html.light-mode ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3B82F6;
@@ -35,6 +47,11 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
+html.light-mode .glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+}
 
 .glass-card-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -45,6 +62,11 @@
   box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
   transform: translateY(-4px);
 }
+html.light-mode .glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(14, 165, 233, 0.5);
+  box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.15);
+}
 
 .glass-nav {
   background: rgba(11, 15, 23, 0.8);
@@ -52,9 +74,19 @@
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
+html.light-mode .glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
 
 .text-gradient {
   background: linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html.light-mode .text-gradient {
+  background: linear-gradient(135deg, #0284C7 0%, #4F46E5 50%, #9333EA 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -72,6 +104,11 @@
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+html.light-mode .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
 }
 
 @keyframes float {
