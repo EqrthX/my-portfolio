@@ -87,7 +87,7 @@ const Skills = () => {
               className={`px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                 activeTab === cat.id
                   ? 'bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/25 scale-105'
-                  : 'bg-slate-900/80 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
+                  : 'bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-700'
               }`}
             >
               {cat.label}
@@ -111,17 +111,17 @@ const Skills = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                   key={skill.name}
-                  className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-800/80 flex flex-col justify-between"
+                  className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                      <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
                         <Icon className="w-5 h-5" />
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white mb-1">{skill.name}</h3>
-                    <p className="text-xs text-slate-400 font-light mb-2">{skill.desc}</p>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">{skill.name}</h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 font-light mb-2">{skill.desc}</p>
                   </div>
                 </motion.div>
               )

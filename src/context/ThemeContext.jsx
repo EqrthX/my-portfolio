@@ -10,12 +10,12 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('portfolio-theme', theme)
     const root = document.documentElement
-    if (theme === 'light') {
-      root.classList.add('light-mode')
-      root.classList.remove('dark-mode')
+    if (theme === 'dark') {
+      root.classList.add('dark')
+      root.classList.remove('light')
     } else {
-      root.classList.add('dark-mode')
-      root.classList.remove('light-mode')
+      root.classList.remove('dark')
+      root.classList.add('light')
     }
   }, [theme])
 

@@ -90,26 +90,26 @@ const Contact = () => {
               return (
                 <div
                   key={method.id}
-                  className="glass-card glass-card-hover p-6 rounded-3xl border border-slate-800/80 flex items-center justify-between group"
+                  className="glass-card glass-card-hover p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-4">
                     <div className={`p-3.5 rounded-2xl bg-gradient-to-br ${method.color} border shadow-lg`}>
                       <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <p className="text-xs font-medium text-slate-400">{method.title}</p>
-                      <h3 className="text-sm sm:text-base font-bold text-white font-mono break-all">{method.value}</h3>
+                      <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{method.title}</p>
+                      <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white font-mono break-all">{method.value}</h3>
                     </div>
                   </div>
 
                   {/* Copy Button */}
                   <button
                     onClick={() => handleCopy(method.value, method.id)}
-                    className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors relative"
+                    className="p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-700 transition-colors relative"
                     title={t('คัดลอกไปยังคลิปบอร์ด', 'Copy to Clipboard')}
                   >
                     {isCopied ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
+                      <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
@@ -124,12 +124,12 @@ const Contact = () => {
             })}
 
             {/* Response Time Card */}
-            <div className="p-6 rounded-3xl bg-gradient-to-r from-cyan-950/40 via-indigo-950/40 to-slate-900/60 border border-cyan-500/20 backdrop-blur-md">
+            <div className="p-6 rounded-3xl bg-cyan-500/10 dark:bg-cyan-950/40 border border-cyan-300/50 dark:border-cyan-500/20 backdrop-blur-md">
               <div className="flex items-center gap-3 mb-2">
-                <Sparkles className="w-5 h-5 text-cyan-400" />
-                <h4 className="text-sm font-bold text-white">{t('ตอบกลับรวดเร็วแน่นอน', 'Fast Response Guaranteed')}</h4>
+                <Sparkles className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">{t('ตอบกลับรวดเร็วแน่นอน', 'Fast Response Guaranteed')}</h4>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed font-light">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light">
                 {t('โดยปกติผมจะตอบกลับข้อความภายใน 24 ชั่วโมง สามารถส่งอีเมลหรือข้อความมาได้ตลอดเวลาครับ', 'I typically respond to messages within 24 hours. Feel free to send an email or direct message anytime.')}
               </p>
             </div>
@@ -139,7 +139,7 @@ const Contact = () => {
           <div className="lg:col-span-7">
             <form 
               onSubmit={handleSubmit}
-              className="glass-card p-8 sm:p-10 rounded-3xl border border-slate-800/80 shadow-2xl space-y-6 relative"
+              className="glass-card p-8 sm:p-10 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl space-y-6 relative"
             >
               {/* Form Toast Feedback */}
               {submitted && (
@@ -159,8 +159,8 @@ const Contact = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Full Name */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                    {t('ชื่อ-นามสกุล', 'Full Name')} <span className="text-cyan-400">*</span>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                    {t('ชื่อ-นามสกุล', 'Full Name')} <span className="text-cyan-500 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -168,14 +168,14 @@ const Contact = () => {
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                     placeholder={t('ชื่อของคุณ', 'Your Name')}
-                    className="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-sm"
                   />
                 </div>
 
                 {/* Email */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                    {t('อีเมลสำหรับติดต่อ', 'Email Address')} <span className="text-cyan-400">*</span>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                    {t('อีเมลสำหรับติดต่อ', 'Email Address')} <span className="text-cyan-500 dark:text-cyan-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -183,7 +183,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="name@example.com"
-                    className="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-sm"
                   />
                 </div>
               </div>

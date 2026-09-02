@@ -110,9 +110,9 @@ const ProjectDetail = () => {
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate('/', { state: { scrollTo: 'projects' } })}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors shadow-lg cursor-pointer text-sm font-semibold"
+          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-xl bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 text-slate-800 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-700 transition-colors shadow-lg cursor-pointer text-sm font-semibold"
         >
-          <ArrowLeft className="w-4 h-4 text-cyan-400" />
+          <ArrowLeft className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
           {t('กลับหน้าผลงาน', 'Back to Projects')}
         </motion.button>
 
@@ -121,7 +121,7 @@ const ProjectDetail = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="glass-card bg-[#0F172A]/80 border border-slate-800/80 rounded-3xl overflow-hidden shadow-2xl"
+          className="glass-card border border-slate-200/80 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-2xl"
         >
           {/* Cover Image */}
           <div 
@@ -133,7 +133,7 @@ const ProjectDetail = () => {
               alt={project.title[language] || project.title.en}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
             
             {/* Zoom Hint Overlay */}
             <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-900/90 backdrop-blur-xs text-cyan-300 px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 border border-slate-700 shadow-xl">
@@ -143,7 +143,7 @@ const ProjectDetail = () => {
 
             {/* Category Tag Overlay */}
             <div className="absolute bottom-6 left-8">
-              <span className="px-3.5 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 border border-cyan-500/30 rounded-full shadow-lg">
+              <span className="px-3.5 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-cyan-300 bg-slate-900/90 border border-cyan-500/40 rounded-full shadow-lg">
                 {project.categoryLabel[language] || project.categoryLabel.en}
               </span>
             </div>
@@ -154,24 +154,24 @@ const ProjectDetail = () => {
             
             {/* Title & Description */}
             <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-white tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-slate-900 dark:text-white tracking-tight">
                 {project.title[language] || project.title.en}
               </h1>
-              <p className="text-slate-300 text-base sm:text-lg font-light leading-relaxed">
+              <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg font-light leading-relaxed">
                 {(project.fullDescription && project.fullDescription[language]) || project.description[language] || project.description.en}
               </p>
             </div>
 
             {/* Tech Stack */}
             <div className="space-y-4">
-              <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <Code className="w-4 h-4 text-cyan-400" /> {t('เทคโนโลยีที่ใช้', 'Technologies Used')}
+              <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <Code className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('เทคโนโลยีที่ใช้', 'Technologies Used')}
               </h3>
               <div className="flex flex-wrap gap-2.5">
                 {project.tags.map((tag) => (
                   <span 
                     key={tag}
-                    className="px-3 py-1.5 text-xs sm:text-sm font-mono font-medium rounded-xl bg-slate-800 border border-slate-700/80 text-slate-200"
+                    className="px-3 py-1.5 text-xs sm:text-sm font-mono font-medium rounded-xl bg-slate-200/80 dark:bg-slate-800 border border-slate-300 dark:border-slate-700/80 text-slate-800 dark:text-slate-200"
                   >
                     {tag}
                   </span>
@@ -182,13 +182,13 @@ const ProjectDetail = () => {
             {/* Highlights / Features */}
             {featuresList.length > 0 && (
               <div className="space-y-4">
-                <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400" /> {t('ภาพรวม & ไฮไลท์ของระบบ', 'Key Features & Highlights')}
+                <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-emerald-500 dark:text-emerald-400" /> {t('ภาพรวม & ไฮไลท์ของระบบ', 'Key Features & Highlights')}
                 </h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {featuresList.map((feat, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-sm text-slate-300 bg-slate-900/50 p-4 rounded-2xl border border-slate-800/80">
-                      <span className="text-cyan-400 font-bold mt-0.5">•</span>
+                    <li key={idx} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800/80">
+                      <span className="text-cyan-500 dark:text-cyan-400 font-bold mt-0.5">•</span>
                       <span className="leading-relaxed">{feat}</span>
                     </li>
                   ))}
@@ -198,14 +198,14 @@ const ProjectDetail = () => {
 
             {/* Project Walkthrough Modules */}
             {project.modules && project.modules.length > 0 && (
-              <div className="space-y-10 pt-10 border-t border-slate-800/60">
+              <div className="space-y-10 pt-10 border-t border-slate-200/80 dark:border-slate-800/60">
                 
                 {/* Section Subtitle */}
                 <div className="text-center md:text-left max-w-3xl">
-                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center justify-center md:justify-start gap-2 mb-2">
-                    <Layers className="w-4 h-4 text-cyan-400" /> {t('เจาะลึกรายละเอียดทุกหน้าจอระบบ', 'System Screens Walkthrough & Modules')}
+                  <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center justify-center md:justify-start gap-2 mb-2">
+                    <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('เจาะลึกรายละเอียดทุกหน้าจอระบบ', 'System Screens Walkthrough & Modules')}
                   </h3>
-                  <p className="text-slate-400 text-sm font-light leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm font-light leading-relaxed">
                     {t('รายละเอียดและฟังก์ชันการทำงานของแต่ละหน้าจอในโปรเจกต์นี้', 'Detailed explanation and key capabilities for each system screen in this project.')}
                   </p>
                 </div>
@@ -224,7 +224,7 @@ const ProjectDetail = () => {
                         <div className="lg:col-span-6">
                           <div 
                             onClick={() => openLightbox(mod.image)}
-                            className="group relative rounded-3xl overflow-hidden border border-slate-800/80 bg-slate-900/20 p-2.5 hover:border-cyan-500/50 transition-all duration-300 shadow-xl cursor-pointer"
+                            className="group relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-slate-100/50 dark:bg-slate-900/20 p-2.5 hover:border-cyan-500/50 transition-all duration-300 shadow-xl cursor-pointer"
                           >
                             <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-950">
                               <img 
@@ -244,10 +244,10 @@ const ProjectDetail = () => {
 
                         {/* Text side - takes 6 cols */}
                         <div className="lg:col-span-6 space-y-4">
-                          <h4 className="text-xl sm:text-2xl font-bold font-heading text-white">
+                          <h4 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white">
                             {mod.title[language] || mod.title.en}
                           </h4>
-                          <p className="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+                          <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base font-light leading-relaxed">
                             {mod.description[language] || mod.description.en}
                           </p>
 
@@ -255,8 +255,8 @@ const ProjectDetail = () => {
                           {moduleFeatures.length > 0 && (
                             <ul className="space-y-2">
                               {moduleFeatures.map((feat, fIdx) => (
-                                <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-400">
-                                  <CheckCircle className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                                <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                                  <CheckCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 mt-0.5 flex-shrink-0" />
                                   <span className="leading-relaxed">{feat}</span>
                                 </li>
                               ))}

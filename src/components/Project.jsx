@@ -84,7 +84,7 @@ const Project = () => {
                     <h3 className="text-xl font-bold font-heading text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
                       {project.title[language] || project.title.en}
                     </h3>
-                    <p className="text-slate-400 text-sm font-light leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-slate-600 dark:text-slate-400 text-sm font-light leading-relaxed mb-4 line-clamp-3">
                       {project.description[language] || project.description.en}
                     </p>
 
@@ -93,7 +93,7 @@ const Project = () => {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2.5 py-0.5 text-[11px] font-mono rounded-md bg-slate-900 text-slate-300 border border-slate-800"
+                          className="px-2.5 py-0.5 text-[11px] font-mono rounded-md bg-slate-200/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-800"
                         >
                           {tag}
                         </span>
@@ -103,10 +103,10 @@ const Project = () => {
                 </div>
 
                 {/* Footer Action Bar inside Card */}
-                <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-slate-800/40 pt-4">
+                <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-slate-200/60 dark:border-slate-800/40 pt-4">
                   <button
                     onClick={() => navigate(`/projects/${project.id}`)}
-                    className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors cursor-pointer"
+                    className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 flex items-center gap-1 transition-colors cursor-pointer"
                   >
                     <span>{t('ภาพรวม & รายละเอียด', 'Overview & Details')}</span>
                     <Eye className="w-3.5 h-3.5" />

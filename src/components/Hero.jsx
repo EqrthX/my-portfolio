@@ -80,9 +80,9 @@ const Hero = () => {
                 href="https://github.com/EqrthX"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-900/80 hover:bg-slate-800/90 border border-slate-700/80 rounded-2xl shadow-lg hover:border-slate-600 hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-800 dark:text-slate-200 bg-white/90 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800/90 border border-slate-300 dark:border-slate-700/80 rounded-2xl shadow-lg hover:border-slate-400 dark:hover:border-slate-600 hover:text-slate-900 dark:hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
-                <Github className="w-4 h-4 text-cyan-400" />
+                <Github className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
                 <span>{t('โปรไฟล์ GitHub', 'GitHub Profile')}</span>
               </a>
             </div>
@@ -101,7 +101,7 @@ const Hero = () => {
               <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-glow" />
 
               {/* Main Avatar Container */}
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full p-2 bg-[#0B0F17] border border-slate-800 shadow-2xl flex items-center justify-center overflow-hidden">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full p-2 bg-slate-100 dark:bg-[#0B0F17] border border-slate-300 dark:border-slate-800 shadow-2xl flex items-center justify-center overflow-hidden">
                 <img
                   src={earth}
                   alt="Nontprawitch Saetang"
@@ -110,23 +110,23 @@ const Hero = () => {
               </div>
 
               {/* Floating Decorative Badges */}
-              <div className="absolute -bottom-4 -left-4 bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-2xl p-3 shadow-xl flex items-center gap-3 animate-float">
-                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+              <div className="absolute -bottom-4 -left-4 bg-white/95 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl p-3 shadow-xl flex items-center gap-3 animate-float">
+                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
                   <Terminal className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 font-medium">{t('เป้าหมายหลัก', 'Primary Focus')}</p>
-                  <p className="text-xs font-bold text-white">{t('พัฒนาเว็บ Full Stack', 'Full Stack Web Dev')}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t('เป้าหมายหลัก', 'Primary Focus')}</p>
+                  <p className="text-xs font-bold text-slate-900 dark:text-white">{t('พัฒนาเว็บ Full Stack', 'Full Stack Web Dev')}</p>
                 </div>
               </div>
 
-              <div className="absolute -top-2 -right-2 bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-2xl p-3 shadow-xl flex items-center gap-3 animate-float" style={{ animationDelay: '2s' }}>
-                <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <div className="absolute -top-2 -right-2 bg-white/95 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl p-3 shadow-xl flex items-center gap-3 animate-float" style={{ animationDelay: '2s' }}>
+                <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
                   <Layers className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 font-medium">{t('สถาปัตยกรรม', 'Architecture')}</p>
-                  <p className="text-xs font-bold text-white">MERN Stack</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t('สถาปัตยกรรม', 'Architecture')}</p>
+                  <p className="text-xs font-bold text-slate-900 dark:text-white">MERN Stack</p>
                 </div>
               </div>
 
@@ -140,23 +140,23 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 glass-card p-6 rounded-3xl border border-slate-800/80 shadow-2xl"
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 glass-card p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl"
         >
-          <div className="flex flex-col items-center p-3 text-center border-r border-slate-800/80 last:border-r-0">
+          <div className="flex flex-col items-center p-3 text-center border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
             <span className="text-3xl font-extrabold text-gradient font-heading">1+</span>
-            <span className="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('ผลงานที่โดดเด่น', 'Featured Projects')}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('ผลงานที่โดดเด่น', 'Featured Projects')}</span>
           </div>
-          <div className="flex flex-col items-center p-3 text-center border-r border-slate-800/80 last:border-r-0">
-            <span className="text-3xl font-extrabold text-cyan-400 font-heading">Full-Stack</span>
-            <span className="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('หน้าบ้าน & หลังบ้าน', 'Frontend & Backend')}</span>
+          <div className="flex flex-col items-center p-3 text-center border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
+            <span className="text-3xl font-extrabold text-cyan-500 dark:text-cyan-400 font-heading">Full-Stack</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('หน้าบ้าน & หลังบ้าน', 'Frontend & Backend')}</span>
           </div>
-          <div className="flex flex-col items-center p-3 text-center border-r border-slate-800/80 last:border-r-0">
-            <span className="text-3xl font-extrabold text-indigo-400 font-heading">100%</span>
-            <span className="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('รองรับทุกหน้าจอ', 'Responsive Design')}</span>
+          <div className="flex flex-col items-center p-3 text-center border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
+            <span className="text-3xl font-extrabold text-indigo-500 dark:text-indigo-400 font-heading">100%</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('รองรับทุกหน้าจอ', 'Responsive Design')}</span>
           </div>
           <div className="flex flex-col items-center p-3 text-center">
-            <span className="text-3xl font-extrabold text-purple-400 font-heading">{t('เรียนรู้ตลอดเวลา', 'Active')}</span>
-            <span className="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('ผู้เรียนรู้ & พัฒนา', 'Learner & Builder')}</span>
+            <span className="text-3xl font-extrabold text-purple-500 dark:text-purple-400 font-heading">{t('เรียนรู้ตลอดเวลา', 'Active')}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('ผู้เรียนรู้ & พัฒนา', 'Learner & Builder')}</span>
           </div>
         </motion.div>
 
