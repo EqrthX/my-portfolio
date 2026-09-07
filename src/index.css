@@ -131,3 +131,12 @@ html.dark .bg-grid-pattern {
 .animate-pulse-glow {
   animation: pulseGlow 8s ease-in-out infinite;
 }
+
+/* Scrollbar Hide Utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

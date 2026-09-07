@@ -55,9 +55,9 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-3 shadow-lg shadow-black/20' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        
+
         {/* Brand Logo */}
-        <div 
+        <div
           onClick={handleLogoClick}
           className="flex items-center gap-3 cursor-pointer group"
         >
@@ -67,7 +67,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-bold font-heading tracking-tight text-white flex items-center gap-1">
+            <span className="text-xl font-bold font-heading tracking-tight text-black dark:text-white flex items-center gap-1">
               Earth<span className="text-cyan-400">.dev</span>
             </span>
             <span className="text-[10px] text-slate-400 uppercase tracking-widest -mt-1 font-semibold">
@@ -106,7 +106,7 @@ const Navbar = () => {
 
         {/* Action Button, Language Toggle, & Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
-          
+
           {/* Language Toggle Button */}
           <button
             onClick={toggleLanguage}
@@ -165,10 +165,9 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer Menu */}
-      <div 
-        className={`md:hidden fixed inset-x-4 top-20 bg-[#0F172A]/95 backdrop-blur-2xl rounded-2xl border border-slate-800 p-6 shadow-2xl transition-all duration-300 ease-in-out origin-top ${
-          isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
-        }`}
+      <div
+        className={`md:hidden fixed inset-x-4 top-20 bg-[#0F172A]/95 backdrop-blur-2xl rounded-2xl border border-slate-800 p-6 shadow-2xl transition-all duration-300 ease-in-out origin-top ${isOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'
+          }`}
       >
         <div className="flex flex-col gap-3">
           {navItems.map((item) => (

@@ -412,7 +412,7 @@ export const projects = [
       th: "เป็นโปรเจคจบที่นำเรื่อง Meachine Learing มาประยุกต์กับ Web Application เพื่อตรวจจับพฤติกรรมนักศึกษาในห้องแลปคอมพิวเตอร์โดยใช้กล้องเว็บแคม ดูผล Dashboard เพื่อดูพฤติกรรมเด็กที่ได้รับการตรวจจับได้ว่าทำอะไรอยู่ โดยจะแยกเป็นพฤติกรรม นั่งเล่นโทรศัพท์, มองซ้าย มองขวา, มองกระดาน, ก้มหน้า",
       en: "A capstone project combining Machine Learning with a Web Application to detect student behaviors in a computer lab via real-time webcam feeds. The dashboard visualizes detected behaviors classified into 4 categories: playing on phone, looking left/right, looking at board, and bowing head."
     },
-    image: DetectImg1,
+    image: DetectImg2,
     video: DetectVideo,
     videoTitle: {
       th: "วิดีโอตัวอย่างผลลัพธ์การตรวจจับพฤติกรรม (AI Detection Result Demo)",
@@ -423,8 +423,8 @@ export const projects = [
       en: "Demonstration video showcasing real-time YOLO model inference on webcam feeds, classifying student behaviors into 4 categories: playing on phone, looking left/right, looking at board, and bowing head."
     },
     gallery: [
-      DetectImg1,
       DetectImg2,
+      DetectImg1,
       DetectImg3,
       DetectImg4,
       DetectImg5,
