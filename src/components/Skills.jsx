@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Code, Layout, Server, Database, Wrench, Users, 
   Cpu, ChevronDown
@@ -145,25 +144,17 @@ const Skills = () => {
 
         </div>
 
-        {/* Dynamic Display Area */}
-        <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
+        {/* Keep results mounted so filtering never waits for an exit animation. */}
+            <div
+              role="list"
+              aria-live="polite"
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
             >
               {filteredSkills.map((skill) => {
                 const Icon = skill.icon
                 return (
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
+                  <div
+                    role="listitem"
                     key={skill.name}
                     className="glass-card glass-card-hover p-5 sm:p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 flex flex-col justify-between"
                   >
@@ -177,11 +168,10 @@ const Skills = () => {
                       <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1">{skill.name}</h3>
                       <p className="text-xs text-slate-600 dark:text-slate-400 font-light mb-2">{skill.desc}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 )
               })}
-            </motion.div>
-        </AnimatePresence>
+            </div>
         </div>
 
       </div>
