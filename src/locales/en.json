@@ -405,6 +405,15 @@
     "screenDetails": "Screen Details",
     "closeEsc": "Close (Esc)",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "overview": "Overview",
+    "screens": "Screens",
+    "projectSections": "Project sections",
+    "aboutProject": "About this project",
+    "exploreScreens": "Explore screens",
+    "chooseScreen": "Select a screen to see how it works. Open the image for a larger view.",
+    "screenNumber": "Screen {{count}}",
+    "openScreen": "Enlarge: {{title}}",
+    "screenPreview": "Project screenshot. Open the image to view it in detail."
   }
 }

@@ -1,519 +1,271 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, Github, CheckCircle, Code, Layers, ZoomIn, X, ChevronLeft, ChevronRight, Images, Video } from 'lucide-react'
+import { ArrowLeft, Github, CheckCircle, Code, ZoomIn, X, ChevronLeft, ChevronRight, Images, Video, LayoutGrid } from 'lucide-react'
 import { projects } from '../data/projects'
 import { useTranslation } from 'react-i18next'
 
-const ProjectDetail = () => {
+const ProjectDetailContent = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { t } = useTranslation()
-  
-  // State for image lightbox/modal
+  const project = projects.find(item => String(item.id) === id)
+  const [selection, setSelection] = useState({ projectId: id, index: 0 })
+  const [tab, setTab] = useState('overview')
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const dialogRef = useRef(null)
+  const closeRef = useRef(null)
+  const openerRef = useRef(null)
+  const tabRefs = useRef({})
+  const tabListRef = useRef(null)
 
-  // Find project by ID
-  const project = projects.find(p => p.id === parseInt(id || '1', 10))
-
-  // Collect all unique images for this project
-  const allImages = useMemo(() => {
+  // Keep every screenshot and module accessible, including modules sharing an image.
+  const screens = useMemo(() => {
     if (!project) return []
-    const list = []
-    if (project.image) list.push(project.image)
-    if (project.gallery && Array.isArray(project.gallery)) {
-      project.gallery.forEach(img => {
-        if (img && !list.includes(img)) list.push(img)
-      })
-    }
-    if (project.modules && Array.isArray(project.modules)) {
-      project.modules.forEach(m => {
-        if (m.image && !list.includes(m.image)) list.push(m.image)
-      })
-    }
-    return list
+    const modules = project.modules || []
+    const images = [...new Set([project.image, ...(project.gallery || [])].filter(Boolean))]
+    return [
+      ...modules.map(module => ({ ...module })),
+      ...images.filter(image => !modules.some(module => module.image === image))
+        .map(image => ({ image, title: null, description: null, features: null })),
+    ]
   }, [project])
+  const selectedIndex = selection.projectId === id ? Math.min(selection.index, screens.length - 1) : 0
+  const selectedScreen = screens[selectedIndex]
+  const selectScreen = index => setSelection({ projectId: id, index })
+  const moveScreen = direction => setSelection(previous => ({
+    projectId: id,
+    index: ((previous.projectId === id ? previous.index : 0) + direction + screens.length) % screens.length,
+  }))
+  const screenTitle = (screen, index) => screen.title
+    ? t(screen.title).replace(/^\d+\.\s*/, '')
+    : t('projectDetail.screenNumber', { count: index + 1 })
+  const activeTab = tab === 'demo' && !project?.video ? 'overview' : tab
 
-  // Get active screen info for current lightbox image
-  const currentImageInfo = useMemo(() => {
-    const currentImg = allImages[currentImageIndex]
-    if (!currentImg || !project) return null
-    // Search in project modules for an exact image match
-    const foundModule = project.modules?.find(m => m.image === currentImg)
-    if (foundModule) {
-      return {
-        title: t(foundModule.title),
-        description: t(foundModule.description),
-        features: foundModule.features ? t(foundModule.features, { returnObjects: true }) : []
-      }
+  useEffect(() => {
+    if (!isModalOpen) return
+    const dialog = dialogRef.current
+    const opener = openerRef.current
+    const previousOverflow = document.body.style.overflow
+    dialog.showModal()
+    closeRef.current?.focus()
+    document.body.style.overflow = 'hidden'
+    return () => {
+      dialog.close()
+      document.body.style.overflow = previousOverflow
+      opener?.focus({ preventScroll: true })
     }
-    return {
-      title: `${t('projectDetail.systemScreen')} ${currentImageIndex + 1}: ${t(project.title)}`,
-      description: t(project.fullDescription || project.description),
-      features: []
-    }
-  }, [allImages, currentImageIndex, project, t])
+  }, [isModalOpen])
 
-  const openLightbox = (imgUrl) => {
-    const idx = allImages.indexOf(imgUrl)
-    if (idx !== -1) {
-      setCurrentImageIndex(idx)
-    } else {
-      setCurrentImageIndex(0)
-    }
+  const openLightbox = event => {
+    openerRef.current = event.currentTarget
     setIsModalOpen(true)
   }
 
-  // Keyboard navigation for Lightbox
-  useEffect(() => {
-    if (!isModalOpen) return
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setIsModalOpen(false)
-      } else if (e.key === 'ArrowLeft') {
-        setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1))
-      } else if (e.key === 'ArrowRight') {
-        setCurrentImageIndex((prev) => (prev === allImages.length - 1 ? 0 : prev + 1))
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isModalOpen, allImages])
-
   if (!project) {
     return (
-      <div className="min-h-screen pt-28 pb-16 flex flex-col justify-center items-center px-4">
-        <h2 className="text-2xl font-bold mb-4">{t('projectDetail.projectNotFound')}</h2>
-        <button 
-          onClick={() => navigate('/')}
-          className="px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-white rounded-xl transition-colors font-semibold"
-        >
+      <div className="min-h-screen pt-28 px-4 text-center">
+        <h1 className="text-2xl font-bold mb-6">{t('projectDetail.projectNotFound')}</h1>
+        <button onClick={() => navigate('/')} className="rounded-xl bg-cyan-600 px-5 py-3 text-white">
           {t('projectDetail.backToHome')}
         </button>
       </div>
     )
   }
 
-  const featuresList = t(project.features, { returnObjects: true }) || []
+  const features = project.features ? t(project.features, { returnObjects: true }) : []
+  const screenFeatures = selectedScreen?.features ? t(selectedScreen.features, { returnObjects: true }) : []
+  const tabs = [
+    { id: 'overview', label: t('projectDetail.overview'), icon: LayoutGrid },
+    ...(screens.length ? [{ id: 'screens', label: t('projectDetail.screens'), icon: Images }] : []),
+    ...(project.video ? [{ id: 'demo', label: t('projectDetail.demoVideo'), icon: Video }] : []),
+  ]
+  const handleTabKey = (event, index) => {
+    let next
+    if (event.key === 'ArrowRight') next = (index + 1) % tabs.length
+    if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length
+    if (event.key === 'Home') next = 0
+    if (event.key === 'End') next = tabs.length - 1
+    if (next === undefined) return
+    event.preventDefault()
+    setTab(tabs[next].id)
+    tabRefs.current[tabs[next].id]?.focus()
+  }
 
   return (
-    <div className="pt-28 pb-20 min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Back Button */}
-        <motion.button
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          onClick={() => navigate('/', { state: { scrollTo: 'projects' } })}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-xl bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 text-slate-800 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-700 transition-colors shadow-lg cursor-pointer text-sm font-semibold"
-        >
-          <ArrowLeft className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-          {t('projectDetail.backToProjects')}
-        </motion.button>
+    <div className="min-h-screen pt-24 sm:pt-28 pb-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button onClick={() => navigate('/', { state: { scrollTo: 'projects' } })}
+          className="inline-flex items-center gap-2 py-3 mb-5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300">
+          <ArrowLeft className="h-4 w-4" /> {t('projectDetail.backToProjects')}
+        </button>
 
-        {/* Project Container */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="glass-card border border-slate-200/80 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-2xl"
-        >
-          {/* Cover Image */}
-          <div 
-            onClick={() => openLightbox(project.image)}
-            className="group relative h-64 sm:h-[420px] w-full bg-slate-900 overflow-hidden border-b border-slate-800 cursor-pointer"
-          >
-            <img 
-              src={project.image} 
-              alt={t(project.title)}
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
-            
-            {/* Zoom Hint Overlay */}
-            <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-900/90 backdrop-blur-xs text-cyan-300 px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 border border-slate-700 shadow-xl">
-              <ZoomIn className="w-4 h-4 text-cyan-400" />
-              <span>{t('projectDetail.clickToEnlarge')}</span>
-            </div>
-
-            {/* Category Tag Overlay */}
-            <div className="absolute bottom-6 left-8">
-              <span className="px-3.5 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-cyan-300 bg-slate-900/90 border border-cyan-500/40 rounded-full shadow-lg">
-                {t(project.categoryLabel)}
-              </span>
-            </div>
-          </div>
-
-          {/* Details Body */}
-          <div className="p-8 sm:p-12 space-y-12">
-            
-            {/* Title & Description */}
-            <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-slate-900 dark:text-white tracking-tight">
-                {t(project.title)}
-              </h1>
-              <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg font-light leading-relaxed">
-                {(project.fullDescription && t(project.fullDescription)) || t(project.description)}
-              </p>
-            </div>
-
-            {/* Tech Stack */}
-            <div className="space-y-4">
-              <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <Code className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('projectDetail.technologiesUsed')}
-              </h3>
-              <div className="flex flex-wrap gap-2.5">
-                {project.tags.map((tag) => (
-                  <span 
-                    key={tag}
-                    className="px-3 py-1.5 text-xs sm:text-sm font-mono font-medium rounded-xl bg-slate-200/80 dark:bg-slate-800 border border-slate-300 dark:border-slate-700/80 text-slate-800 dark:text-slate-200"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Highlights / Features */}
-            {featuresList.length > 0 && (
-              <div className="space-y-4">
-                <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 dark:text-emerald-400" /> {t('projectDetail.keyFeaturesHighlights')}
-                </h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {featuresList.map((feat, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800/80">
-                      <span className="text-cyan-500 dark:text-cyan-400 font-bold mt-0.5">•</span>
-                      <span className="leading-relaxed">{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Project Walkthrough Modules */}
-            {project.modules && project.modules.length > 0 && (
-              <div className="space-y-10 pt-10 border-t border-slate-200/80 dark:border-slate-800/60">
-                
-                {/* Section Subtitle */}
-                <div className="text-center md:text-left max-w-3xl">
-                  <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center justify-center md:justify-start gap-2 mb-2">
-                    <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('projectDetail.systemScreensWalkthroughModules')}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm font-light leading-relaxed">
-                    {t('projectDetail.detailedExplanationAndKeyCapabilitiesFor')}
-                  </p>
-                </div>
-
-                <div className="space-y-12">
-                  {project.modules.map((mod, idx) => {
-                    const isEven = idx % 2 === 0
-                    const moduleFeatures = t(mod.features, { returnObjects: true }) || []
-
-                    return (
-                      <div 
-                        key={idx} 
-                        className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}
-                      >
-                        {/* Image side - takes 6 cols */}
-                        <div className="lg:col-span-6">
-                          <div 
-                            onClick={() => openLightbox(mod.image)}
-                            className="group relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-slate-100/50 dark:bg-slate-900/20 p-2.5 hover:border-cyan-500/50 transition-all duration-300 shadow-xl cursor-pointer"
-                          >
-                            <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-950">
-                              <img 
-                                src={mod.image} 
-                                alt={t(mod.title)}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              />
-                              <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                                <span className="px-4 py-2 rounded-xl bg-slate-900/90 border border-cyan-500/40 text-cyan-300 text-xs font-semibold flex items-center gap-2 shadow-xl">
-                                  <ZoomIn className="w-4 h-4 text-cyan-400" />
-                                  {t('projectDetail.enlargeViewExplanation')}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Text side - takes 6 cols */}
-                        <div className="lg:col-span-6 space-y-4">
-                          <h4 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white">
-                            {t(mod.title)}
-                          </h4>
-                          <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base font-light leading-relaxed">
-                            {t(mod.description)}
-                          </p>
-
-                          {/* Features List */}
-                          {moduleFeatures.length > 0 && (
-                            <ul className="space-y-2">
-                              {moduleFeatures.map((feat, fIdx) => (
-                                <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                                  <CheckCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 mt-0.5 flex-shrink-0" />
-                                  <span className="leading-relaxed">{feat}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* Project Image Gallery Showcase */}
-            {allImages.length > 1 && (
-              <div className="space-y-6 pt-10 border-t border-slate-800/60">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Images className="w-4 h-4 text-cyan-400" /> {t('projectDetail.systemScreenshotsGallery')}
-                  </h3>
-                  <span className="text-xs text-slate-500 font-mono">
-                    {t('projectDetail.clickToViewFullImageDetailed', { count: allImages.length })}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {allImages.map((img, idx) => {
-                    const matchingModule = project.modules?.find(m => m.image === img)
-
-                    return (
-                      <motion.div
-                        key={idx}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => openLightbox(img)}
-                        className="group relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900/80 cursor-pointer shadow-lg hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between"
-                      >
-                        <div className="relative aspect-video w-full overflow-hidden bg-slate-950">
-                          <img 
-                            src={img} 
-                            alt={`Screenshot ${idx + 1}`} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                          />
-                          <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                            <ZoomIn className="w-6 h-6 text-cyan-400 drop-shadow-md" />
-                          </div>
-                          <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800 text-[10px] font-mono text-slate-300 opacity-80">
-                            #{idx + 1}
-                          </div>
-                        </div>
-
-                        {/* Title label under thumbnail */}
-                        <div className="p-3 bg-slate-900/90 text-left border-t border-slate-800/80">
-                          <p className="text-xs font-semibold text-slate-200 line-clamp-1 group-hover:text-cyan-300 transition-colors">
-                            {matchingModule ? (t(matchingModule.title)) : `${t('projectDetail.screen')} ${idx + 1}`}
-                          </p>
-                        </div>
-                      </motion.div>
-                    )
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* Project Demonstration Video Showcase */}
-            {project.video && (
-              <div className="space-y-6 pt-10 border-t border-slate-800/60">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Video className="w-4 h-4 text-cyan-400" /> {project.videoTitle ? (t(project.videoTitle)) : t('projectDetail.demoVideo')}
-                  </h3>
-                  <span className="text-xs text-slate-500 font-mono flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    {t('projectDetail.aiModelRealTimeInferenceResult')}
-                  </span>
-                </div>
-
-                <div className="group relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl">
-                  <div className="relative aspect-video w-full overflow-hidden bg-slate-950 flex items-center justify-center">
-                    <video 
-                      controls 
-                      playsInline
-                      preload="metadata"
-                      src={project.video}
-                      className="w-full h-full object-contain"
-                    >
-                      {t('projectDetail.yourBrowserDoesNotSupportHtml5')}
-                    </video>
-                  </div>
-
-                  {project.videoDescription && (
-                    <div className="p-4 sm:p-5 bg-slate-900/90 border-t border-slate-800/80 text-left space-y-1">
-                      <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-400">
-                        {t('projectDetail.videoDemonstrationBreakdown')}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                        {t(project.videoDescription)}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Code Repository Actions */}
-            <div className="pt-8 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
-              <div className="text-xs text-slate-500 font-light">
-                {t('projectDetail.developedAsPartOfAWeb')}
-              </div>
-
+        <header className="grid gap-6 lg:grid-cols-2 lg:gap-10 items-center mb-8">
+          <div className="min-w-0">
+            <span className="inline-block rounded-full border border-cyan-500/25 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-700 dark:text-cyan-300 mb-4">
+              {t(project.categoryLabel)}
+            </span>
+            <h1 className="text-2xl sm:text-4xl font-bold font-heading tracking-tight leading-tight mb-4 text-slate-900 dark:text-white break-words">
+              {t(project.title)}
+            </h1>
+            <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 mb-5">{t(project.description)}</p>
+            <div className="flex flex-wrap gap-3">
               {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-slate-850 hover:bg-slate-800 border border-slate-700 rounded-xl transition-all shadow-md hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <Github className="w-4.5 h-4.5 text-cyan-400" />
-                  {t('projectDetail.viewGithubSource')}
+                <a href={project.github} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-cyan-500 px-4 py-3 text-sm font-semibold text-white dark:text-slate-950 hover:opacity-90">
+                  <Github className="h-4 w-4" /> {t('projectDetail.viewGithubSource')}
                 </a>
               )}
+              {screens.length > 0 && (
+                <button onClick={() => {
+                  setTab('screens')
+                  window.requestAnimationFrame(() => {
+                    tabRefs.current.screens?.focus({ preventScroll: true })
+                    tabListRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  })
+                }}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-3 text-sm font-semibold hover:border-cyan-500">
+                  <Images className="h-4 w-4 text-cyan-600 dark:text-cyan-400" /> {t('projectDetail.exploreScreens')}
+                </button>
+              )}
             </div>
-
           </div>
-        </motion.div>
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 overflow-hidden">
+            <img src={project.image} alt={t(project.title)} className="w-full aspect-video object-contain" />
+          </div>
+        </header>
 
+        <div className="glass-card rounded-2xl p-4 sm:p-5 mb-8">
+          <h2 className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 mb-3">
+            <Code className="h-4 w-4" /> {t('projectDetail.technologiesUsed')}
+          </h2>
+          <ul className="flex flex-wrap gap-2">
+            {project.tags.map(tag => <li key={tag} className="rounded-lg bg-slate-200/70 dark:bg-slate-800 px-2.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-200">{tag}</li>)}
+          </ul>
+        </div>
+
+        <div ref={tabListRef} role="tablist" aria-label={t('projectDetail.projectSections')}
+          className="scroll-mt-24 flex gap-1 border-b border-slate-200 dark:border-slate-800 mb-6">
+          {tabs.map((item, index) => {
+            const Icon = item.icon
+            return (
+              <button key={item.id} ref={element => { tabRefs.current[item.id] = element }}
+                id={`project-tab-${item.id}`} role="tab" aria-selected={activeTab === item.id}
+                aria-controls={`project-panel-${item.id}`} tabIndex={activeTab === item.id ? 0 : -1}
+                onClick={() => setTab(item.id)} onKeyDown={event => handleTabKey(event, index)}
+                className={`flex flex-1 sm:flex-none items-center justify-center gap-2 px-2 sm:px-5 py-3 min-h-12 text-xs sm:text-sm font-semibold border-b-2 transition-colors ${activeTab === item.id ? 'border-cyan-500 text-cyan-700 dark:text-cyan-300' : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}>
+                <Icon className="h-4 w-4 shrink-0" /> {item.label}
+              </button>
+            )
+          })}
+        </div>
+
+        <section id="project-panel-overview" role="tabpanel" aria-labelledby="project-tab-overview" tabIndex={0} hidden={activeTab !== 'overview'}>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="glass-card rounded-2xl p-5 sm:p-7">
+              <h2 className="text-lg font-bold mb-4">{t('projectDetail.aboutProject')}</h2>
+              <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300">{t(project.fullDescription || project.description)}</p>
+            </div>
+            <div className="glass-card rounded-2xl p-5 sm:p-7">
+              <h2 className="text-lg font-bold mb-4">{t('projectDetail.keyFeaturesHighlights')}</h2>
+              <ul className="space-y-4">
+                {features.map((feature, index) => (
+                  <li key={index} className="flex gap-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    <CheckCircle className="h-4 w-4 shrink-0 mt-1 text-cyan-600 dark:text-cyan-400" /> {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {screens.length > 0 && (
+          <section id="project-panel-screens" role="tabpanel" aria-labelledby="project-tab-screens" tabIndex={0} hidden={activeTab !== 'screens'}>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-5">{t('projectDetail.chooseScreen')}</p>
+            <div className="grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)] items-start">
+              <div className="lg:hidden">
+                <label htmlFor="project-screen-select" className="block text-xs font-semibold mb-2">{t('projectDetail.screens')}</label>
+                <select id="project-screen-select" value={selectedIndex} onChange={event => selectScreen(Number(event.target.value))}
+                  className="w-full min-w-0 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-3 text-sm">
+                  {screens.map((screen, index) => <option key={index} value={index}>{index + 1}. {screenTitle(screen, index)}</option>)}
+                </select>
+              </div>
+              <nav aria-label={t('projectDetail.screens')} className="hidden lg:block glass-card rounded-2xl p-2 max-h-[620px] overflow-y-auto">
+                {screens.map((screen, index) => (
+                  <button key={index} onClick={() => selectScreen(index)} aria-current={index === selectedIndex ? 'true' : undefined}
+                    className={`flex w-full items-center gap-3 rounded-xl p-3 text-left text-xs font-medium leading-relaxed ${index === selectedIndex ? 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800'}`}>
+                    <span className="shrink-0 tabular-nums text-slate-400">{String(index + 1).padStart(2, '0')}</span>
+                    {screenTitle(screen, index)}
+                  </button>
+                ))}
+              </nav>
+              <div className="min-w-0 glass-card rounded-2xl overflow-hidden">
+                <button onClick={openLightbox} aria-label={t('projectDetail.openScreen', { title: screenTitle(selectedScreen, selectedIndex) })}
+                  className="relative block w-full bg-slate-100 dark:bg-slate-950 group">
+                  <img src={selectedScreen.image} alt={screenTitle(selectedScreen, selectedIndex)} className="w-full aspect-video object-contain" loading="lazy" />
+                  <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-900/90 px-3 py-2 text-xs text-white">
+                    <ZoomIn className="h-4 w-4" /> {t('projectDetail.clickToEnlarge')}
+                  </span>
+                </button>
+                <div className="flex items-center justify-between gap-3 px-4 py-3 border-y border-slate-200 dark:border-slate-800">
+                  <button onClick={() => moveScreen(-1)} aria-label={t('projectDetail.previous')} disabled={screens.length < 2} className="rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-slate-800 disabled:opacity-30"><ChevronLeft className="h-5 w-5" /></button>
+                  <span aria-live="polite" className="text-xs text-slate-500 dark:text-slate-400 tabular-nums">{selectedIndex + 1} / {screens.length}</span>
+                  <button onClick={() => moveScreen(1)} aria-label={t('projectDetail.next')} disabled={screens.length < 2} className="rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-slate-800 disabled:opacity-30"><ChevronRight className="h-5 w-5" /></button>
+                </div>
+                <div className="p-5 sm:p-6" aria-live="polite">
+                  <h2 className="text-lg font-bold mb-3">{screenTitle(selectedScreen, selectedIndex)}</h2>
+                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{selectedScreen.description ? t(selectedScreen.description) : t('projectDetail.screenPreview')}</p>
+                  {screenFeatures.length > 0 && <ul className="mt-4 space-y-2">{screenFeatures.map((feature, index) => <li key={index} className="flex gap-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300"><CheckCircle className="h-4 w-4 shrink-0 mt-1 text-cyan-600 dark:text-cyan-400" />{feature}</li>)}</ul>}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {project.video && (
+          <section id="project-panel-demo" role="tabpanel" aria-labelledby="project-tab-demo" tabIndex={0} hidden={activeTab !== 'demo'}>
+            <div className="glass-card rounded-2xl overflow-hidden">
+              {activeTab === 'demo' && <video controls playsInline preload="metadata" src={project.video} poster={project.image} className="w-full aspect-video bg-slate-950 object-contain">{t('projectDetail.yourBrowserDoesNotSupportHtml5')}</video>}
+              <div className="p-5 sm:p-6">
+                <h2 className="text-lg font-bold mb-3">{project.videoTitle ? t(project.videoTitle) : t('projectDetail.demoVideo')}</h2>
+                {project.videoDescription && <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{t(project.videoDescription)}</p>}
+              </div>
+            </div>
+          </section>
+        )}
       </div>
 
-      {/* Lightbox / Image Zoom Modal */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-3 sm:p-6"
-            onClick={() => setIsModalOpen(false)}
-          >
-            <div 
-              className="relative max-w-5xl w-full max-h-[95vh] flex flex-col items-center justify-center select-none"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Header Bar inside Modal */}
-              <div className="w-full flex items-center justify-between px-4 py-3 mb-2 bg-slate-900/90 border border-slate-800 rounded-2xl backdrop-blur-md">
-                <div className="flex items-center gap-2 text-slate-300 text-xs sm:text-sm font-medium font-mono">
-                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-                  <span>
-                    {t('projectDetail.screenDetails')} {currentImageIndex + 1} / {allImages.length}
-                  </span>
-                </div>
-
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="p-2 rounded-xl bg-slate-800/80 hover:bg-red-500/20 hover:text-red-400 text-slate-300 border border-slate-700 transition-colors cursor-pointer"
-                  title={t('projectDetail.closeEsc')}
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Main Image Stage */}
-              <div className="relative w-full h-[55vh] sm:h-[62vh] flex items-center justify-center rounded-2xl overflow-hidden bg-slate-900/50 border border-slate-800/80 p-2">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentImageIndex}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.25 }}
-                    src={allImages[currentImageIndex]}
-                    alt={`Screenshot ${currentImageIndex + 1}`}
-                    className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
-                  />
-                </AnimatePresence>
-
-                {/* Prev / Next buttons */}
-                {allImages.length > 1 && (
-                  <>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1))
-                      }}
-                      className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-slate-900/90 text-slate-200 hover:text-white hover:bg-cyan-500 hover:border-cyan-400 border border-slate-700 shadow-2xl transition-all cursor-pointer group"
-                      title={t('projectDetail.previous')}
-                    >
-                      <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
-                    </button>
-
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setCurrentImageIndex((prev) => (prev === allImages.length - 1 ? 0 : prev + 1))
-                      }}
-                      className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-slate-900/90 text-slate-200 hover:text-white hover:bg-cyan-500 hover:border-cyan-400 border border-slate-700 shadow-2xl transition-all cursor-pointer group"
-                      title={t('projectDetail.next')}
-                    >
-                      <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
-                  </>
-                )}
-              </div>
-
-              {/* Screen Explanation Container inside Modal */}
-              {currentImageInfo && (
-                <div className="w-full mt-3 p-3.5 sm:p-4 bg-slate-900/95 border border-slate-800 rounded-2xl backdrop-blur-md text-left shadow-2xl space-y-1.5 max-h-[18vh] overflow-y-auto">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-sm sm:text-base font-bold font-heading text-cyan-300 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                      {currentImageInfo.title}
-                    </h4>
-                    <span className="text-[11px] font-mono text-slate-400 bg-slate-800 px-2.5 py-0.5 rounded-full border border-slate-700 flex-shrink-0">
-                      #{currentImageIndex + 1} / {allImages.length}
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                    {currentImageInfo.description}
-                  </p>
-                  {currentImageInfo.features && currentImageInfo.features.length > 0 && (
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {currentImageInfo.features.map((feat, fIdx) => (
-                        <span key={fIdx} className="text-[11px] text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded-md border border-slate-700/60">
-                          • {feat}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Thumbnail Bar at bottom of Modal if multiple images */}
-              {allImages.length > 1 && (
-                <div className="w-full flex items-center justify-center gap-2 mt-3 px-2 overflow-x-auto py-1.5">
-                  {allImages.map((img, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentImageIndex(idx)}
-                      className={`relative w-14 h-10 sm:w-16 sm:h-12 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 cursor-pointer ${
-                        idx === currentImageIndex 
-                          ? 'border-cyan-400 scale-105 shadow-md shadow-cyan-500/20' 
-                          : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-600'
-                      }`}
-                    >
-                      <img src={img} alt={`thumb ${idx}`} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              )}
+      {isModalOpen && selectedScreen && (
+        <dialog ref={dialogRef} aria-labelledby="screen-dialog-title" onCancel={() => setIsModalOpen(false)}
+          onClick={event => { if (event.target === event.currentTarget) setIsModalOpen(false) }}
+          onKeyDown={event => {
+            if (event.key === 'ArrowLeft') { event.preventDefault(); moveScreen(-1) }
+            if (event.key === 'ArrowRight') { event.preventDefault(); moveScreen(1) }
+          }}
+          className="fixed inset-0 m-0 w-full max-w-none h-dvh max-h-none border-0 bg-slate-950/95 text-white p-3 sm:p-6 backdrop:bg-slate-950/80">
+          <div className="max-w-6xl mx-auto h-full flex flex-col gap-3">
+            <div className="flex items-center justify-between gap-3 shrink-0">
+              <h2 id="screen-dialog-title" className="text-sm sm:text-base font-semibold min-w-0">{screenTitle(selectedScreen, selectedIndex)}</h2>
+              <button ref={closeRef} onClick={() => setIsModalOpen(false)} aria-label={t('projectDetail.closeEsc')} className="rounded-xl bg-slate-800 p-3 shrink-0 hover:bg-slate-700"><X className="h-5 w-5" /></button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <div className="flex-1 min-h-0 overflow-auto rounded-xl bg-slate-900 flex items-center justify-center">
+              <img src={selectedScreen.image} alt={screenTitle(selectedScreen, selectedIndex)} className="max-w-full max-h-full object-contain" />
+            </div>
+            <div className="flex items-center justify-between shrink-0">
+              <button onClick={() => moveScreen(-1)} disabled={screens.length < 2} aria-label={t('projectDetail.previous')} className="rounded-xl bg-slate-800 p-3 hover:bg-slate-700 disabled:opacity-30"><ChevronLeft className="h-5 w-5" /></button>
+              <span aria-live="polite" className="text-sm tabular-nums text-slate-300">{selectedIndex + 1} / {screens.length}</span>
+              <button onClick={() => moveScreen(1)} disabled={screens.length < 2} aria-label={t('projectDetail.next')} className="rounded-xl bg-slate-800 p-3 hover:bg-slate-700 disabled:opacity-30"><ChevronRight className="h-5 w-5" /></button>
+            </div>
+          </div>
+        </dialog>
+      )}
     </div>
   )
 }
 
-export default ProjectDetail
+// Reset the selected tab, screen and dialog when opening another project.
+const ProjectDetail = () => {
+  const { id } = useParams()
+  return <ProjectDetailContent key={id} />
+}
 
+export default ProjectDetail
