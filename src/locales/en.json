@@ -1,0 +1,405 @@
+{
+  "projects": {
+    "project1": {
+      "title": "E-Commerce custom game console Web Application",
+      "categoryLabel": "Full-Stack Web App",
+      "description": "A comprehensive e-commerce platform built as a Year 2 university capstone project featuring product catalogs, cart management, and user checkout.",
+      "fullDescription": "A full-featured web-based e-commerce platform developed with a custom PHP backend and MySQL relational database. Includes role-based authentication, product categorization, shopping cart state management, and order transaction handling.",
+      "features": [
+        "User registration, login, and session authentication",
+        "Interactive product catalog with category search",
+        "Shopping cart management and total calculation",
+        "Admin control panel for product stock updates"
+      ],
+      "modules": {
+        "item1": {
+          "title": "Client-Side User Portal",
+          "description": "The storefront display for custom painted console designs. Users can register, log in to secure their persistent cart state, browse available coloring patterns, and submit paint orders. A key policy requires users to ship their official hardware to the workshop for paint application.",
+          "features": [
+            "User registration and secure session state tracking (Login/Logout)",
+            "Product catalog classifying custom console prints and paint costs",
+            "Shopping cart logic and summary total checkout flow"
+          ]
+        },
+        "item2": {
+          "title": "Admin Back-Office Dashboard",
+          "description": "The backend workspace enabling store administrators to view and process paint order queues, update paint status, and manage console design records linked with a MySQL database.",
+          "features": [
+            "Dedicated control panel summaries for store administrators",
+            "Direct inventory control tools to modify database console records",
+            "Order queue management tools to alter operational queue states"
+          ]
+        }
+      }
+    },
+    "project2": {
+      "title": "Book University Web Application",
+      "categoryLabel": "Full-Stack Web App",
+      "description": "Web application for a university secondhand book management and exchange platform, cataloging books, trades, and inventory.",
+      "fullDescription": "Full-featured web platform for tracking secondhand book inventories, buy/sell transactions, and student user accounts.",
+      "features": [
+        "Book directory and classification search index layout",
+        "Secondhand book listing and user management interface",
+        "Transaction records and history tracking container"
+      ],
+      "modules": {
+        "item1": {
+          "title": "1. Website Homepage",
+          "description": "The homepage serves as the primary interface for students to browse and search for secondhand textbooks uploaded by other students. Users can click on any book listing to view detailed information, including cover images, prices, titles, seller details, and internal contents.",
+          "features": [
+            "Display secondhand textbooks with cover images, prices, titles, and seller profiles",
+            "Book search functionality and detailed item view navigation"
+          ]
+        },
+        "item2": {
+          "title": "2. Secondhand Book Listing",
+          "description": "Students can post their unused secondhand textbooks for sale on the platform. Required input fields include book photos, title, selling price, course name, delivery/pickup method, and additional descriptions. If in-person pickup is chosen, contact details must be provided.",
+          "features": [
+            "Secondhand textbook listing form for student sellers",
+            "Upload book photos, set price, specify course, pickup method, and contact info"
+          ]
+        },
+        "item3": {
+          "title": "3. Shopping Cart & Order Checkout",
+          "description": "Shopping cart interface displaying selected books, total price calculation, persistent user session cart storage, and order submission flow.",
+          "features": [
+            "Automatic total price calculation for selected books",
+            "Persistent session-based shopping cart storage per user account"
+          ]
+        },
+        "item4": {
+          "title": "4. Student Profile & Transaction Logs",
+          "description": "Used for viewing personal account profile details and switching between purchase history and book listing sales history.",
+          "features": [
+            "Display student profile information and user account details",
+            "Toggle menu between purchase history logs and book sales records"
+          ]
+        },
+        "item5": {
+          "title": "5. Order & Rental Transaction History",
+          "description": "Comprehensive transaction history log recording all past secondhand book purchases, sales, and borrow-return archives.",
+          "features": [
+            "Complete archive of all past book purchases and borrow-return records",
+            "Verify transaction states and historical order details"
+          ]
+        },
+        "item6": {
+          "title": "6. Student Chat & Communication Portal",
+          "description": "Chat interface allowing students to communicate directly with other students to negotiate, discuss book details, and coordinate pickup or purchase agreements.",
+          "features": [
+            "Direct student-to-student instant messaging system",
+            "Coordinate book pickup locations and negotiate purchase details"
+          ]
+        },
+        "item7": {
+          "title": "7. Admin Faculty Student Permission Dashboard",
+          "description": "This page serves as the faculty admin interface for managing student access permissions and registering new eligible users to the platform.",
+          "features": [
+            "Register and manage eligible student entries for platform access",
+            "Store student user permissions in MySQL database"
+          ]
+        },
+        "item8": {
+          "title": "8. Book Listing Verification & Approval",
+          "description": "When a student posts a book for sale, admins review the incoming listing submission to verify genuine book photos and details before granting approval to publish it on the site.",
+          "features": [
+            "Admin review queue for incoming student book listing posts",
+            "Verification of book photo authenticity and listing approval workflow"
+          ]
+        },
+        "item9": {
+          "title": "9. Order & Payment Verification Queue",
+          "description": "Operations workspace enabling admin staff to review student transaction details and verify if payment transfers and receipts are valid.",
+          "features": [
+            "Review student transaction records and payment slip confirmations",
+            "Verify payment validity to approve order processing"
+          ]
+        },
+        "item10": {
+          "title": "10. Active User Management (Post-Project Feature)",
+          "description": "A feature concept created post-project phase to inspect registered student accounts in the system and monitor real-time user active status.",
+          "features": [
+            "Inspect total registered student accounts in the system database",
+            "Track active online status and user platform engagement"
+          ]
+        },
+        "item11": {
+          "title": "11. System Settings & Role Management",
+          "description": "Backend administration workspace managing user roles and permissions (Student/Admin), global penalty fee rates, and category settings.",
+          "features": [
+            "User permissions and role authority access manager",
+            "Global faculty categories and penalty fee rate configurations"
+          ]
+        }
+      }
+    },
+    "project3": {
+      "title": "Behavior Detection Web Application",
+      "categoryLabel": "Full-Stack Web App & AI",
+      "description": "A capstone web application applying Machine Learning & YOLO computer vision models to detect student behaviors in a computer lab using webcam feeds.",
+      "fullDescription": "A capstone project combining Machine Learning with a Web Application to detect student behaviors in a computer lab via real-time webcam feeds. The dashboard visualizes detected behaviors classified into 4 categories: playing on phone, looking left/right, looking at board, and bowing head.",
+      "videoTitle": "Real-time AI Behavior Detection Result Demo",
+      "videoDescription": "Demonstration video showcasing real-time YOLO model inference on webcam feeds, classifying student behaviors into 4 categories: playing on phone, looking left/right, looking at board, and bowing head.",
+      "features": [
+        "Connect and stream data from YOLO models trained on Roboflow running with CUDA acceleration for real-time inference",
+        "Display real-time student behavior analytics and classification on a live web dashboard",
+        "Store historical behavior logs into Supabase database for tracking and analytics"
+      ],
+      "modules": {
+        "item1": {
+          "title": "1. RSupabase",
+          "description": "Supabase is a Backend as a Service (BaaS) platform that provides a PostgreSQL database, authentication, storage, and real-time subscriptions. I chose Supabase for this project because it solves the common issue of managing database exports and imports during development. By using Supabase, team members can access the same database directly from their local machines without the need for manual export/import operations, ensuring everyone works with consistent and up-to-date data.",
+          "features": [
+            "Real-time video stream container with AI behavior detection bounding boxes",
+            "Overlaid behavior classification labels (phone usage, looking left/right, looking at board, bowing head)"
+          ]
+        },
+        "item2": {
+          "title": "2. Behavior Analytics & Classification Overview",
+          "description": "This is the first screen of the website, which is the home screen. It displays all the information such as the name of the professor, the class schedule, and the latest detected data.",
+          "features": [
+            "Graphical breakdown of detected behavior proportions in computer labs"
+          ]
+        },
+        "item3": {
+          "title": "3. Historical Behavior Logs & Query Interface",
+          "description": "Historical detection log table querying data stored in Supabase, allowing users to filter behavior records by timestamps and categories.",
+          "features": [
+            "Historical log table synced with Supabase database"
+          ]
+        },
+        "item4": {
+          "title": "4. Camera Stream & Model Connection Management",
+          "description": "This screen retrieves data from Supabase to display detected information. Users can filter by date, course, and group to view specific details of interest.",
+          "features": [
+            "High-speed frame extraction and WebSocket streaming system",
+            "GPU CUDA acceleration setup for real-time YOLO model inference"
+          ]
+        },
+        "item5": {
+          "title": "5. Temporary JSON Buffer & Supabase Sync Pipeline",
+          "description": "During real-time behavior detection, logs are continuously written to a temporary JSON file first to prevent data loss if connection drops or if the application is closed. Once 'End Detection' is clicked, the JSON file data is synced and saved directly into Supabase.",
+          "features": [
+            "Temporary JSON buffering during active detection to prevent data loss",
+            "Batch synchronization of JSON logs into Supabase upon clicking End Detection"
+          ]
+        }
+      }
+    },
+    "project4": {
+      "title": "TaskFlow Project Management",
+      "categoryLabel": "Backend REST API",
+      "description": "Project and task allocation backend API scaffold to arrange task weights and monitor collaborative workflows.",
+      "fullDescription": "Backend service API scaffold designed for assigning tickets, tracking project status, and analyzing team productivity levels.",
+      "features": [
+        "User roles assignment and token authentication schema design",
+        "Task ticket creations and board workflow state transitions API",
+        "Relational model linking projects to child tasks under MySQL"
+      ],
+      "modules": {
+        "item1": {
+          "title": "User & Role Authentication Service",
+          "description": "Identity API endpoints controlling register, JWT logins, and granular team authority structures.",
+          "features": [
+            "Register and token verify endpoint controllers",
+            "Token authentication security middleware setup"
+          ]
+        },
+        "item2": {
+          "title": "Task Distribution Engine",
+          "description": "REST controller endpoints handling task creations, modifications, deletions, and queue status shifts.",
+          "features": [
+            "CRUD endpoints for handling task tickets",
+            "Relational querying schema for assigning work details to users"
+          ]
+        }
+      }
+    }
+  },
+  "contact": {
+    "emailAddress": "Email Address",
+    "phoneMobile": "Phone / Mobile",
+    "facebookProfile": "Facebook Profile",
+    "letSCollaborate": "Let's Collaborate",
+    "getIn": "Get In ",
+    "touch": "Touch",
+    "haveAProjectInMindA": "Have a project in mind, a job opportunity, or just want to connect? Reach out anytime!",
+    "copyToClipboard": "Copy to Clipboard",
+    "copied": "Copied!",
+    "fastResponseGuaranteed": "Fast Response Guaranteed",
+    "iTypicallyRespondToMessagesWithin": "I typically respond to messages within 24 hours. Feel free to send an email or direct message anytime.",
+    "messageSentSuccessfully": "Message sent successfully!",
+    "thankYouForReachingOutI": "Thank you for reaching out. I'll get back to you shortly.",
+    "fullName": "Full Name",
+    "yourName": "Your Name",
+    "emailAddress2": "Email Address",
+    "subject": "Subject",
+    "projectCollaborationJobOpportunity": "Project Collaboration / Job Opportunity",
+    "message": "Message",
+    "tellMeAboutYourProjectDetails": "Tell me about your project details or inquiries...",
+    "sendMessage": "Send Message"
+  },
+  "footer": {
+    "home": "Home",
+    "skills": "Skills",
+    "projects": "Projects",
+    "journey": "Journey",
+    "contact": "Contact",
+    "fullStackDeveloperPortfolio": "Full-Stack Developer Portfolio",
+    "nontprawitchSaetangEarthAllRightsReserved": "© {{year}} Nontprawitch Saetang (Earth). All rights reserved.",
+    "builtWithReactTailwindCss": "Built with React & Tailwind CSS",
+    "backToTop": "Back to Top",
+    "top": "Top"
+  },
+  "hero": {
+    "availableForFullStackDeveloperRoles": "Available for Full-Stack & Developer Roles",
+    "helloIM": "Hello, I'm",
+    "nontprawitch": "Nontprawitch",
+    "earth": "(Earth)",
+    "fullStackDeveloper": "Full Stack Developer",
+    "iMAFreshGraduateWith": "I'm a fresh graduate with a passion for full stack development, fast learning, hard working, problem solving and learning new hark skill",
+    "viewProjects": "View Projects",
+    "githubProfile": "GitHub Profile",
+    "primaryFocus": "Primary Focus",
+    "fullStackWebDev": "Full Stack Web Dev",
+    "architecture": "Architecture",
+    "featuredProjects": "Featured Projects",
+    "frontendBackend": "Frontend & Backend",
+    "responsiveDesign": "Responsive Design",
+    "active": "Active",
+    "learnerBuilder": "Learner & Builder"
+  },
+  "navbar": {
+    "home": "Home",
+    "skills": "Skills",
+    "projects": "Projects",
+    "journey": "Journey",
+    "contact": "Contact",
+    "fullStack": "Full Stack",
+    "switchLanguage": "Switch Language / สลับภาษา",
+    "switchToLightMode": "Switch to Light Mode",
+    "switchToDarkMode": "Switch to Dark Mode",
+    "getInTouch": "Get In Touch",
+    "getInTouch2": "Get In Touch",
+    "contactMe": "Contact Me",
+    "contactMe2": "Contact Me",
+    "toggleMenu": "Toggle menu"
+  },
+  "project": {
+    "portfolioShowcase": "Portfolio Showcase",
+    "featured": "Featured ",
+    "projects": "Projects",
+    "aShowcaseOfWebApplicationsMobile": "A showcase of web applications, mobile projects, and backend API services I have built.",
+    "viewDetails": "View Details",
+    "githubSource": "GitHub Source",
+    "overviewDetails": "Overview & Details",
+    "code": "Code"
+  },
+  "skills": {
+    "allSkills": "All Skills",
+    "toolsDb": "Tools & DB",
+    "softSkills": "Soft Skills",
+    "semanticStructureAccessibility": "Semantic Structure & Accessibility",
+    "responsiveDesignCustomStyling": "Responsive Design & Custom Styling",
+    "modernJsSyntaxAsyncOperations": "Modern JS Syntax & Async Operations",
+    "hooksComponentLifecycleRouter": "Hooks, Component Lifecycle & Router",
+    "rapidGridUiLayouts": "Rapid Grid UI Layouts",
+    "objectOrientedApplicationBuilding": "Object-oriented application building",
+    "enterpriseServerBackendFramework": "Enterprise server backend framework",
+    "scriptingBackendAndDataScience": "Scripting, backend, and data science",
+    "restfulApiDevelopmentMiddleware": "RESTful API Development & Middleware",
+    "highPerformanceModernPythonApiFramework": "High-performance modern Python API framework",
+    "databaseSchemaDesignQuerying": "Database Schema Design & Querying",
+    "microsoftRelationalDatabaseEngine": "Microsoft relational database engine",
+    "containerizationApplicationDeployment": "Containerization & application deployment",
+    "microsoftCloudPlatformServices": "Microsoft cloud platform & services",
+    "backendAsAServiceUsingPostgresql": "Backend-as-a-Service using PostgreSQL",
+    "computerVisionDatasetManagement": "Computer vision dataset management",
+    "realTimeObjectDetectionModels": "Real-time object detection models",
+    "versionControlCodeRepositories": "Version Control & Code Repositories",
+    "apiTestingDocumentation": "API Testing & Documentation",
+    "developmentEnvironmentExtensions": "Development Environment & Extensions",
+    "localApacheMariadbServer": "Local Apache & MariaDB Server",
+    "problemSolving": "Problem-solving",
+    "debuggingAlgorithmLogic": "Debugging & Algorithm Logic",
+    "teamworkCollaboration": "Teamwork & Collaboration",
+    "effectiveCommunicationInProjects": "Effective Communication in Projects",
+    "timeManagement": "Time Management",
+    "taskPrioritizationDeadlines": "Task Prioritization & Deadlines",
+    "capabilitiesTechStack": "Capabilities & Tech Stack",
+    "skills": "Skills & ",
+    "technologies": "Technologies",
+    "toolsFrameworksAndMethodologiesILeverage": "Tools, frameworks, and methodologies I leverage to build robust software applications."
+  },
+  "timeline": {
+    "year12022": "Year 1 (2022)",
+    "firstLinesOfCode": "First Lines of Code",
+    "foundations": "Foundations",
+    "startedMyProgrammingJourneyInUniversity": "Started my programming journey in university. Learned foundations of HTML, CSS, JavaScript, and programming logic, before touching PHP as the first server-side language.",
+    "html5Css3JavascriptFundamentals": "HTML5, CSS3 & JavaScript fundamentals",
+    "basicPhpFirstStepToBackend": "Basic PHP — first step to backend development",
+    "introductionToMysqlDatabaseDesign": "Introduction to MySQL & database design",
+    "familiarizationWithGitVersionControl": "Familiarization with Git & version control",
+    "year22023": "Year 2 (2023)",
+    "fullStackWebAndroidDevelopment": "Full-Stack Web & Android Development",
+    "projectBasedLearning": "Project-Based Learning",
+    "builtMyFirstRealProjectsRanging": "Built my first real projects—ranging from an E-Commerce web app with PHP/MySQL to an Android mobile app, practicing OOP and database relationships in real scenarios.",
+    "builtECommerceWebAppWith": "Built E-Commerce web app with PHP + MySQL covering login, shopping cart, and payment flow",
+    "developedAndroidMobileAppBookloverWith": "Developed Android mobile app (BooKLover) with Java + SQLite",
+    "designedRelationalDatabaseSchemasAndNormalization": "Designed relational database schemas and normalization",
+    "learnedRestApiConceptsAndHttp": "Learned REST API concepts and HTTP methods",
+    "year32024": "Year 3 (2024)",
+    "nodeJsReactModernBackend": "Node.js, React & Modern Backend",
+    "frameworkMastery": "Framework Mastery",
+    "movedToTheModernJavascriptStack": "Moved to the modern JavaScript stack—started using Node.js + Express to build REST APIs with ORM, learned React for complex dynamic frontends, and SQL Server for enterprise-grade databases.",
+    "createdNodeJsExpressRestApis": "Created Node.js + Express REST APIs with middleware, auth, and error handling",
+    "usedSequelizeOrmSqlServerFor": "Used Sequelize ORM & SQL Server for enterprise projects",
+    "masteredReactHooksContextComponentArchitecture": "Mastered React (Hooks, Context, component architecture) + Tailwind CSS",
+    "utilizedSupabaseServerlessBackendWithPostgresql": "Utilized Supabase—Serverless backend with PostgreSQL",
+    "year3420242025": "Year 3–4 (2024–2025)",
+    "aiComputerVisionPythonBackend": "AI / Computer Vision & Python Backend",
+    "emergingTechnologies": "Emerging Technologies",
+    "expandedMyHorizonToAiAnd": "Expanded my horizon to AI and Computer Vision—used Python + FastAPI to build ML inference backends, and implemented YOLO + Roboflow for real-time object detection in projects.",
+    "builtHighPerformanceAsyncApisWith": "Built high-performance async APIs with Python + FastAPI for ML model inference",
+    "implementedYoloV8V11ObjectDetection": "Implemented YOLO (v8/v11) object detection & Roboflow dataset management",
+    "trainedCustomMlModelsWithCustom": "Trained custom ML models with custom-annotated datasets",
+    "learnedCNetEnterpriseOopAnd": "Learned C# .NET—enterprise OOP and Windows application development",
+    "present2025": "Present (2025)",
+    "cloudDevopsProductionReadyApps": "Cloud, DevOps & Production-Ready Apps",
+    "cloudDevops": "Cloud & DevOps",
+    "aimingAtDeployingProductionGradeApplications": "Aiming at deploying production-grade applications—using Docker to containerize services, Azure cloud for hosting and scaling, and designing elegant interfaces with good UX.",
+    "usedDockerToContainerizeApplicationsAnd": "Used Docker to containerize applications and manage services",
+    "microsoftAzureCloudHostingAppServices": "Microsoft Azure—cloud hosting, App Services & blob storage",
+    "builtProductionGradePortfolioUsingReact": "Built production-grade portfolio using React 19 + Vite + Tailwind v4",
+    "exploringCiCdPipelinesAndCloud": "Exploring CI/CD pipelines and cloud-native architecture",
+    "milestonesExperience": "Milestones & Experience",
+    "developer": "Developer ",
+    "journey": "Journey",
+    "myEducationalBackgroundKeyAchievementsAnd": "My educational background, key achievements, and continuous learning progression."
+  },
+  "projectDetail": {
+    "systemScreen": "System Screen",
+    "projectNotFound": "Project not found",
+    "backToHome": "Back to Home",
+    "backToProjects": "Back to Projects",
+    "clickToEnlarge": "Click to enlarge",
+    "technologiesUsed": "Technologies Used",
+    "keyFeaturesHighlights": "Key Features & Highlights",
+    "systemScreensWalkthroughModules": "System Screens Walkthrough & Modules",
+    "detailedExplanationAndKeyCapabilitiesFor": "Detailed explanation and key capabilities for each system screen in this project.",
+    "enlargeViewExplanation": "Enlarge & View Explanation",
+    "systemScreenshotsGallery": "System Screenshots Gallery",
+    "clickToViewFullImageDetailed": "Click to view full image & detailed screen breakdown ({{count}} items)",
+    "screen": "Screen",
+    "demoVideo": "Demo Video",
+    "aiModelRealTimeInferenceResult": "AI Model Real-Time Inference Result",
+    "yourBrowserDoesNotSupportHtml5": "Your browser does not support HTML5 video.",
+    "videoDemonstrationBreakdown": "Video Demonstration Breakdown",
+    "developedAsPartOfAWeb": "Developed as part of a Web Technologies Showcase.",
+    "viewGithubSource": "View GitHub Source",
+    "screenDetails": "Screen Details",
+    "closeEsc": "Close (Esc)",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

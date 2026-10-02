@@ -1,20 +1,20 @@
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { Code2, Github, Facebook, Mail, ArrowUp } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
-  const { t } = useLanguage()
+  const { t } = useTranslation()
 
   const scrollToTop = () => {
     scroll.scrollToTop()
   }
 
   const navLinks = [
-    { target: 'home', label: t('หน้าแรก', 'Home') },
-    { target: 'skills', label: t('ทักษะ', 'Skills') },
-    { target: 'projects', label: t('ผลงาน', 'Projects') },
-    { target: 'timeline', label: t('เส้นทาง', 'Journey') },
-    { target: 'contact', label: t('ติดต่อ', 'Contact') },
+    { target: 'home', label: t('footer.home') },
+    { target: 'skills', label: t('footer.skills') },
+    { target: 'projects', label: t('footer.projects') },
+    { target: 'timeline', label: t('footer.journey') },
+    { target: 'contact', label: t('footer.contact') },
   ]
 
   return (
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
             <div>
               <span className="text-lg font-bold font-heading text-slate-900 dark:text-white">Nontprawitch Saetang</span>
-              <p className="text-xs text-slate-500 dark:text-slate-500">{t('พอร์ตโฟลิโอสำหรับนักพัฒนา Full-Stack', 'Full-Stack Developer Portfolio')}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-500">{t('footer.fullStackDeveloperPortfolio')}</p>
             </div>
           </div>
 
@@ -86,25 +86,22 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light">
           <p>
-            {t(
-              `© ${new Date().getFullYear()} นนท์ประวิชญ์ แซ่ตั้ง (เอิร์ธ). สงวนลิขสิทธิ์ทั้งหมด`,
-              `© ${new Date().getFullYear()} Nontprawitch Saetang (Earth). All rights reserved.`
-            )}
+            {t('footer.nontprawitchSaetangEarthAllRightsReserved', { year: new Date().getFullYear() })}
           </p>
           
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 text-slate-500">
-              {t('สร้างด้วย React & Tailwind CSS', 'Built with React & Tailwind CSS')}
+              {t('footer.builtWithReactTailwindCss')}
             </span>
 
             {/* Back to Top Button */}
             <button
               onClick={scrollToTop}
               className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/30 transition-all flex items-center gap-1 cursor-pointer"
-              title={t('กลับขึ้นด้านบน', 'Back to Top')}
+              title={t('footer.backToTop')}
             >
               <ArrowUp className="w-4 h-4" />
-              <span className="text-[10px] font-bold uppercase tracking-wider">{t('บนสุด', 'Top')}</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider">{t('footer.top')}</span>
             </button>
           </div>
         </div>

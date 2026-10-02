@@ -38,3 +38,6 @@ dist-ssr
 .vscode/
 .idea/
 
+
+# Local npm cache
+.npm-cache/

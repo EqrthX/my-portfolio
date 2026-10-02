@@ -2,11 +2,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { FolderGit2, Github, Eye } from 'lucide-react'
 import { projects } from '../data/projects'
-import { useLanguage } from '../context/LanguageContext'
+import { useTranslation } from 'react-i18next'
 
 const Project = () => {
   const navigate = useNavigate()
-  const { language, t } = useLanguage()
+  const { t } = useTranslation()
 
   return (
     <section id="projects" className="relative py-24 min-h-screen flex flex-col justify-center items-center">
@@ -20,13 +20,13 @@ const Project = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-semibold uppercase tracking-widest mb-4">
             <FolderGit2 className="w-3.5 h-3.5" />
-            {t('ผลงานทั้งหมด', 'Portfolio Showcase')}
+            {t('project.portfolioShowcase')}
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-slate-900 dark:text-white">
-            {t('โปรเจกต์ที่', 'Featured ')}<span className="text-gradient">{t('แนะนำ', 'Projects')}</span>
+            {t('project.featured')}<span className="text-gradient">{t('project.projects')}</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg font-light">
-            {t('การรวบรวมผลงานการพัฒนาเว็บแอปพลิเคชัน โมบายแอป และบริการ API หลังบ้านที่ผมเคยสร้างขึ้น', 'A showcase of web applications, mobile projects, and backend API services I have built.')}
+            {t('project.aShowcaseOfWebApplicationsMobile')}
           </p>
         </div>
 
@@ -51,14 +51,14 @@ const Project = () => {
                   <div className="relative h-56 w-full bg-slate-900 overflow-hidden border-b border-slate-800/80">
                     <img
                       src={project.image}
-                      alt={project.title[language] || project.title.en}
+                      alt={t(project.title)}
                       className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
                     <div className="absolute inset-0 bg-slate-955/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-xs">
                       <button
                         onClick={() => navigate(`/projects/${project.id}`)}
                         className="p-3 rounded-full bg-cyan-500 text-white hover:bg-cyan-400 transition-colors shadow-lg cursor-pointer"
-                        title={t('ดูรายละเอียด', 'View Details')}
+                        title={t('project.viewDetails')}
                       >
                         <Eye className="w-5 h-5" />
                       </button>
@@ -68,7 +68,7 @@ const Project = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-3 rounded-full bg-slate-900 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors border border-slate-700 shadow-lg"
-                          title={t('ดูโค้ดแหล่งข้อมูล', 'GitHub Source')}
+                          title={t('project.githubSource')}
                         >
                           <Github className="w-5 h-5" />
                         </a>
@@ -79,13 +79,13 @@ const Project = () => {
                   {/* Body Content */}
                   <div className="p-6">
                     <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-500 dark:text-cyan-400 mb-2 block">
-                      {project.categoryLabel[language] || project.categoryLabel.en}
+                      {t(project.categoryLabel)}
                     </span>
                     <h3 className="text-xl font-bold font-heading text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-                      {project.title[language] || project.title.en}
+                      {t(project.title)}
                     </h3>
                     <p className="text-slate-600 dark:text-slate-400 text-sm font-light leading-relaxed mb-4 line-clamp-3">
-                      {project.description[language] || project.description.en}
+                      {t(project.description)}
                     </p>
 
                     {/* Tech Badges */}
@@ -108,7 +108,7 @@ const Project = () => {
                     onClick={() => navigate(`/projects/${project.id}`)}
                     className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 flex items-center gap-1 transition-colors cursor-pointer"
                   >
-                    <span>{t('ภาพรวม & รายละเอียด', 'Overview & Details')}</span>
+                    <span>{t('project.overviewDetails')}</span>
                     <Eye className="w-3.5 h-3.5" />
                   </button>
 
@@ -119,7 +119,7 @@ const Project = () => {
                       rel="noopener noreferrer"
                       className="text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
                     >
-                      <span>{t('ดูโค้ด', 'Code')}</span>
+                      <span>{t('project.code')}</span>
                       <Github className="w-3.5 h-3.5" />
                     </a>
                   )}

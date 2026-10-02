@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-scroll'
 import { ArrowRight, Github, Terminal, Layers } from 'lucide-react'
 import earth from '../assets/earth.jpg'
-import { useLanguage } from '../context/LanguageContext'
+import { useTranslation } from 'react-i18next'
 
 const Hero = () => {
-  const { t } = useLanguage()
+  const { t } = useTranslation()
 
   return (
     <section id="home" className="relative min-h-screen pt-28 pb-16 flex flex-col justify-center items-center overflow-hidden">
@@ -21,7 +21,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left"
+            className="min-w-0 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left"
           >
             {/* Availability Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wide mb-6 shadow-inner shadow-cyan-500/10">
@@ -29,26 +29,26 @@ const Hero = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              {t('พร้อมทำงานพัฒนา Full-Stack & Developer', 'Available for Full-Stack & Developer Roles')}
+              {t('hero.availableForFullStackDeveloperRoles')}
             </div>
 
             {/* Main Greeting & Name */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-heading tracking-tight leading-[1.1] mb-4 text-slate-900 dark:text-white">
-              {t('สวัสดีครับ ผมชื่อ', "Hello, I'm")} <br className="hidden sm:inline" />
-              <span className="text-gradient">{t('นนท์ประวิช', 'Nontprawitch')}</span>
-              <span className="text-slate-500 dark:text-slate-400 text-3xl sm:text-5xl lg:text-6xl font-light ml-3 sm:ml-4">{t('(เอิร์ธ)', '(Earth)')}</span>
+            <h1 className="max-w-full break-words text-[clamp(1.875rem,8vw,2.25rem)] sm:text-6xl lg:text-7xl font-extrabold font-heading tracking-tight leading-[1.1] mb-4 text-slate-900 dark:text-white">
+              {t('hero.helloIM')} <br className="hidden sm:inline" />
+              <span className="text-gradient">{t('hero.nontprawitch')}</span>
+              <span className="text-slate-500 dark:text-slate-400 text-3xl sm:text-5xl lg:text-6xl font-light ml-3 sm:ml-4">{t('hero.earth')}</span>
             </h1>
 
             {/* Subtitle / Role */}
             <h2 className="text-lg sm:text-2xl font-medium text-slate-700 dark:text-slate-300 mb-6 flex flex-wrap items-center justify-center lg:justify-start gap-2">
-              <span>{t('นักพัฒนา Full Stack', 'Full Stack Developer')}</span>
+              <span>{t('hero.fullStackDeveloper')}</span>
               <span className="text-cyan-500 dark:text-cyan-400 font-bold">•</span>
               <span className="text-slate-500 dark:text-slate-400">React & Node.js</span>
             </h2>
 
             {/* Brief Bio */}
             <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-2xl mb-8 leading-relaxed font-light">
-              {t('ผมเป็นบัณฑิตจบใหม่ที่มีความหลงใหลในการพัฒนาเว็บแอปพลิเคชันแบบ Full Stack เรียนรู้ไว ขยันทำงาน พร้อมแก้โจทย์ปัญหาเชิงเทคนิคต่างๆ และชอบเรียนรู้เทคโนโลยีอะไรใหม่ๆเพื่อเพิ่มทักษะใหม่ๆให้ตัวเองอยู่เสมอครับ', "I'm a fresh graduate with a passion for full stack development, fast learning, hard working, problem solving and learning new hark skill")}
+              {t('hero.iMAFreshGraduateWith')}
             </p>
 
             {/* Tech stack quick badges */}
@@ -72,7 +72,7 @@ const Hero = () => {
                 offset={-80}
                 className="group flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 rounded-2xl shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
               >
-                <span>{t('ดูผลงานของผม', 'View Projects')}</span>
+                <span>{t('hero.viewProjects')}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
@@ -83,7 +83,7 @@ const Hero = () => {
                 className="flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-800 dark:text-slate-200 bg-white/90 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800/90 border border-slate-300 dark:border-slate-700/80 rounded-2xl shadow-lg hover:border-slate-400 dark:hover:border-slate-600 hover:text-slate-900 dark:hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 <Github className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
-                <span>{t('โปรไฟล์ GitHub', 'GitHub Profile')}</span>
+                <span>{t('hero.githubProfile')}</span>
               </a>
             </div>
 
@@ -115,8 +115,8 @@ const Hero = () => {
                   <Terminal className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t('เป้าหมายหลัก', 'Primary Focus')}</p>
-                  <p className="text-xs font-bold text-slate-900 dark:text-white">{t('พัฒนาเว็บ Full Stack', 'Full Stack Web Dev')}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t('hero.primaryFocus')}</p>
+                  <p className="text-xs font-bold text-slate-900 dark:text-white">{t('hero.fullStackWebDev')}</p>
                 </div>
               </div>
 
@@ -125,7 +125,7 @@ const Hero = () => {
                   <Layers className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t('สถาปัตยกรรม', 'Architecture')}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{t('hero.architecture')}</p>
                   <p className="text-xs font-bold text-slate-900 dark:text-white">MERN Stack</p>
                 </div>
               </div>
@@ -140,23 +140,23 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 glass-card p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl"
+          className="mt-12 sm:mt-20 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 glass-card p-3 sm:p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl [&>div]:min-w-0 [&>div]:p-2 sm:[&>div]:p-3 [&>div>span:first-child]:text-xl sm:[&>div>span:first-child]:text-3xl [&>div>span]:break-words"
         >
-          <div className="flex flex-col items-center p-3 text-center border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
+          <div className="flex flex-col items-center p-3 text-center md:border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
             <span className="text-3xl font-extrabold text-gradient font-heading">1+</span>
-            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('ผลงานที่โดดเด่น', 'Featured Projects')}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('hero.featuredProjects')}</span>
           </div>
-          <div className="flex flex-col items-center p-3 text-center border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
+          <div className="flex flex-col items-center p-3 text-center md:border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
             <span className="text-3xl font-extrabold text-cyan-500 dark:text-cyan-400 font-heading">Full-Stack</span>
-            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('หน้าบ้าน & หลังบ้าน', 'Frontend & Backend')}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('hero.frontendBackend')}</span>
           </div>
-          <div className="flex flex-col items-center p-3 text-center border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
+          <div className="flex flex-col items-center p-3 text-center md:border-r border-slate-200/80 dark:border-slate-800/80 last:border-r-0">
             <span className="text-3xl font-extrabold text-indigo-500 dark:text-indigo-400 font-heading">100%</span>
-            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('รองรับทุกหน้าจอ', 'Responsive Design')}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('hero.responsiveDesign')}</span>
           </div>
           <div className="flex flex-col items-center p-3 text-center">
-            <span className="text-3xl font-extrabold text-purple-500 dark:text-purple-400 font-heading">{t('เรียนรู้ตลอดเวลา', 'Active')}</span>
-            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('ผู้เรียนรู้ & พัฒนา', 'Learner & Builder')}</span>
+            <span className="text-3xl font-extrabold text-purple-500 dark:text-purple-400 font-heading">{t('hero.active')}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">{t('hero.learnerBuilder')}</span>
           </div>
         </motion.div>
 

@@ -1,79 +1,79 @@
 import { motion } from 'framer-motion'
 import { GraduationCap, Code2, Cpu, Cloud, Sparkles, Layers } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
+import { useTranslation } from 'react-i18next'
 
 const Timeline = () => {
-  const { t } = useLanguage()
+  const { t } = useTranslation()
 
   const timelineEvents = [
     {
-      period: t('ปีที่ 1 (2022)', 'Year 1 (2022)'),
-      title: t('เริ่มต้นเขียนโค้ดบรรทัดแรก', 'First Lines of Code'),
-      type: t('พื้นฐาน', 'Foundations'),
+      period: t('timeline.year12022'),
+      title: t('timeline.firstLinesOfCode'),
+      type: t('timeline.foundations'),
       icon: GraduationCap,
       color: 'cyan',
-      description: t('เริ่มต้นเส้นทางการเขียนโปรแกรมในมหาวิทยาลัย เรียนรู้พื้นฐาน HTML, CSS, JavaScript และ logic การเขียนโปรแกรม ก่อนจะสัมผัส PHP เป็นภาษาแรกสำหรับ server-side', 'Started my programming journey in university. Learned foundations of HTML, CSS, JavaScript, and programming logic, before touching PHP as the first server-side language.'),
+      description: t('timeline.startedMyProgrammingJourneyInUniversity'),
       highlights: [
-        t('พื้นฐาน HTML5, CSS3 และ JavaScript', 'HTML5, CSS3 & JavaScript fundamentals'),
-        t('PHP พื้นฐาน — ก้าวแรกสู่ backend development', 'Basic PHP — first step to backend development'),
-        t('MySQL & การออกแบบฐานข้อมูลเบื้องต้น', 'Introduction to MySQL & database design'),
-        t('เริ่มคุ้นเคยกับ Git & การควบคุมเวอร์ชัน', 'Familiarization with Git & version control')
+        t('timeline.html5Css3JavascriptFundamentals'),
+        t('timeline.basicPhpFirstStepToBackend'),
+        t('timeline.introductionToMysqlDatabaseDesign'),
+        t('timeline.familiarizationWithGitVersionControl')
       ]
     },
     {
-      period: t('ปีที่ 2 (2023)', 'Year 2 (2023)'),
-      title: t('การพัฒนาเว็บ Full-Stack & แอป Android', 'Full-Stack Web & Android Development'),
-      type: t('การเรียนรู้ผ่านโปรเจกต์', 'Project-Based Learning'),
+      period: t('timeline.year22023'),
+      title: t('timeline.fullStackWebAndroidDevelopment'),
+      type: t('timeline.projectBasedLearning'),
       icon: Code2,
       color: 'indigo',
-      description: t('ลงมือสร้าง project จริงครั้งแรก — ตั้งแต่ E-Commerce web app ด้วย PHP/MySQL ไปจนถึง Android app สำหรับ mobile platform ฝึก OOP และ database relationship จริงๆ', 'Built my first real projects—ranging from an E-Commerce web app with PHP/MySQL to an Android mobile app, practicing OOP and database relationships in real scenarios.'),
+      description: t('timeline.builtMyFirstRealProjectsRanging'),
       highlights: [
-        t('สร้าง E-Commerce web app ด้วย PHP + MySQL ตั้งแต่ login, ตะกร้าสินค้า, ไปจนถึงการชำระเงิน', 'Built E-Commerce web app with PHP + MySQL covering login, shopping cart, and payment flow'),
-        t('พัฒนา Android mobile app (BooKLover) ด้วย Java + SQLite', 'Developed Android mobile app (BooKLover) with Java + SQLite'),
-        t('ออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์และการทำ Normalization', 'Designed relational database schemas and normalization'),
-        t('เรียนรู้แนวคิด REST API และ HTTP methods', 'Learned REST API concepts and HTTP methods')
+        t('timeline.builtECommerceWebAppWith'),
+        t('timeline.developedAndroidMobileAppBookloverWith'),
+        t('timeline.designedRelationalDatabaseSchemasAndNormalization'),
+        t('timeline.learnedRestApiConceptsAndHttp')
       ]
     },
     {
-      period: t('ปีที่ 3 (2024)', 'Year 3 (2024)'),
-      title: t('Node.js, React & ระบบหลังบ้านสมัยใหม่', 'Node.js, React & Modern Backend'),
-      type: t('ความเชี่ยวชาญด้านเฟรมเวิร์ก', 'Framework Mastery'),
+      period: t('timeline.year32024'),
+      title: t('timeline.nodeJsReactModernBackend'),
+      type: t('timeline.frameworkMastery'),
       icon: Layers,
       color: 'violet',
-      description: t('ก้าวสู่ modern JavaScript stack — เริ่มใช้ Node.js + Express สร้าง REST API พร้อม ORM และเรียนรู้ React สำหรับ dynamic frontend ที่ซับซ้อนขึ้น รวมถึง SQL Server สำหรับ enterprise-grade database', 'Moved to the modern JavaScript stack—started using Node.js + Express to build REST APIs with ORM, learned React for complex dynamic frontends, and SQL Server for enterprise-grade databases.'),
+      description: t('timeline.movedToTheModernJavascriptStack'),
       highlights: [
-        t('สร้าง Node.js + Express REST API พร้อมระบบกรองข้อมูล ยืนยันตัวตน และดักจับข้อผิดพลาด', 'Created Node.js + Express REST APIs with middleware, auth, and error handling'),
-        t('ใช้ Sequelize ORM & SQL Server สำหรับโปรเจกต์ระดับองค์กร', 'Used Sequelize ORM & SQL Server for enterprise projects'),
-        t('ใช้ React (Hooks, Context, สถาปัตยกรรมคอมโพเนนต์) + Tailwind CSS', 'Mastered React (Hooks, Context, component architecture) + Tailwind CSS'),
-        t('ใช้ Supabase — ระบบหลังบ้านแบบ Serverless ร่วมกับ PostgreSQL', 'Utilized Supabase—Serverless backend with PostgreSQL')
+        t('timeline.createdNodeJsExpressRestApis'),
+        t('timeline.usedSequelizeOrmSqlServerFor'),
+        t('timeline.masteredReactHooksContextComponentArchitecture'),
+        t('timeline.utilizedSupabaseServerlessBackendWithPostgresql')
       ]
     },
     {
-      period: t('ปีที่ 3–4 (2024–2025)', 'Year 3–4 (2024–2025)'),
-      title: t('AI / คอมพิวเตอร์วิทัศน์ & หลังบ้านด้วย Python', 'AI / Computer Vision & Python Backend'),
-      type: t('เทคโนโลยีใหม่', 'Emerging Technologies'),
+      period: t('timeline.year3420242025'),
+      title: t('timeline.aiComputerVisionPythonBackend'),
+      type: t('timeline.emergingTechnologies'),
       icon: Cpu,
       color: 'fuchsia',
-      description: t('ขยายขอบเขตสู่ AI และ Computer Vision — ใช้ Python + FastAPI สร้าง backend สำหรับโมเดล ML และนำ YOLO + Roboflow มาใช้ real-time object detection ในโปรเจกต์จริง', 'Expanded my horizon to AI and Computer Vision—used Python + FastAPI to build ML inference backends, and implemented YOLO + Roboflow for real-time object detection in projects.'),
+      description: t('timeline.expandedMyHorizonToAiAnd'),
       highlights: [
-        t('สร้าง async API ประสิทธิภาพสูงด้วย Python + FastAPI สำหรับประมวลผลโมเดล ML', 'Built high-performance async APIs with Python + FastAPI for ML model inference'),
-        t('ตรวจจับวัตถุด้วย YOLO (v8/v11) & จัดการชุดข้อมูลด้วย Roboflow', 'Implemented YOLO (v8/v11) object detection & Roboflow dataset management'),
-        t('เทรนโมเดลเฉพาะทางด้วยชุดข้อมูลที่สร้างขึ้นเอง', 'Trained custom ML models with custom-annotated datasets'),
-        t('ใช้ C# .NET — เรียนรู้ OOP ระดับองค์กรและ Windows Application', 'Learned C# .NET—enterprise OOP and Windows application development')
+        t('timeline.builtHighPerformanceAsyncApisWith'),
+        t('timeline.implementedYoloV8V11ObjectDetection'),
+        t('timeline.trainedCustomMlModelsWithCustom'),
+        t('timeline.learnedCNetEnterpriseOopAnd')
       ]
     },
     {
-      period: t('ปัจจุบัน (2025)', 'Present (2025)'),
-      title: t('คลาวด์, DevOps & แอปพลิเคชันที่พร้อมใช้งานจริง', 'Cloud, DevOps & Production-Ready Apps'),
-      type: t('คลาวด์ & DevOps', 'Cloud & DevOps'),
+      period: t('timeline.present2025'),
+      title: t('timeline.cloudDevopsProductionReadyApps'),
+      type: t('timeline.cloudDevops'),
       icon: Cloud,
       color: 'sky',
-      description: t('มุ่งสู่การ deploy application ระดับ production จริงๆ — ใช้ Docker containerize services, Azure cloud สำหรับ hosting และ scaling รวมถึง design system ที่สวยงามและ UX ที่ดีสำหรับ end user', 'Aiming at deploying production-grade applications—using Docker to containerize services, Azure cloud for hosting and scaling, and designing elegant interfaces with good UX.'),
+      description: t('timeline.aimingAtDeployingProductionGradeApplications'),
       highlights: [
-        t('ใช้ Docker ในการแพ็กแอปพลิเคชันและจัดการบริการต่างๆ', 'Used Docker to containerize applications and manage services'),
-        t('ใช้ Microsoft Azure — การติดตั้งแอปขึ้นคลาวด์, App Service & พื้นที่เก็บข้อมูล', 'Microsoft Azure—cloud hosting, App Services & blob storage'),
-        t('สร้างพอร์ตโฟลิโอพร้อมใช้งานจริงด้วย React 19 + Vite + Tailwind v4', 'Built production-grade portfolio using React 19 + Vite + Tailwind v4'),
-        t('ศึกษาเพิ่มเติมในส่วนของ CI/CD pipeline และสถาปัตยกรรมแบบ Cloud-native', 'Exploring CI/CD pipelines and cloud-native architecture')
+        t('timeline.usedDockerToContainerizeApplicationsAnd'),
+        t('timeline.microsoftAzureCloudHostingAppServices'),
+        t('timeline.builtProductionGradePortfolioUsingReact'),
+        t('timeline.exploringCiCdPipelinesAndCloud')
       ]
     }
   ]
@@ -90,13 +90,13 @@ const Timeline = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-cyan-600 dark:text-cyan-400 text-xs font-semibold uppercase tracking-widest mb-4">
             <Sparkles className="w-3.5 h-3.5" />
-            {t('เหตุการณ์สำคัญ & ประสบการณ์', 'Milestones & Experience')}
+            {t('timeline.milestonesExperience')}
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight mb-4 text-slate-900 dark:text-white">
-            {t('เส้นทางนัก', 'Developer ')}<span className="text-gradient">{t('พัฒนา', 'Journey')}</span>
+            {t('timeline.developer')}<span className="text-gradient">{t('timeline.journey')}</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg font-light">
-            {t('ประวัติการศึกษา ความสำเร็จที่สำคัญ และการพัฒนาความรู้อย่างต่อเนื่องของผม', 'My educational background, key achievements, and continuous learning progression.')}
+            {t('timeline.myEducationalBackgroundKeyAchievementsAnd')}
           </p>
         </div>
 

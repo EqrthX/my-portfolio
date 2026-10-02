@@ -3,12 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Github, CheckCircle, Code, Layers, ZoomIn, X, ChevronLeft, ChevronRight, Images, Video } from 'lucide-react'
 import { projects } from '../data/projects'
-import { useLanguage } from '../context/LanguageContext'
+import { useTranslation } from 'react-i18next'
 
 const ProjectDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { language, t } = useLanguage()
+  const { t } = useTranslation()
   
   // State for image lightbox/modal
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -43,17 +43,17 @@ const ProjectDetail = () => {
     const foundModule = project.modules?.find(m => m.image === currentImg)
     if (foundModule) {
       return {
-        title: foundModule.title[language] || foundModule.title.en,
-        description: foundModule.description[language] || foundModule.description.en,
-        features: foundModule.features ? (foundModule.features[language] || foundModule.features.en) : []
+        title: t(foundModule.title),
+        description: t(foundModule.description),
+        features: foundModule.features ? t(foundModule.features, { returnObjects: true }) : []
       }
     }
     return {
-      title: `${t('ภาพตัวอย่างระบบที่', 'System Screen')} ${currentImageIndex + 1}: ${project.title[language] || project.title.en}`,
-      description: project.fullDescription ? (project.fullDescription[language] || project.fullDescription.en) : (project.description[language] || project.description.en),
+      title: `${t('projectDetail.systemScreen')} ${currentImageIndex + 1}: ${t(project.title)}`,
+      description: t(project.fullDescription || project.description),
       features: []
     }
-  }, [allImages, currentImageIndex, project, language, t])
+  }, [allImages, currentImageIndex, project, t])
 
   const openLightbox = (imgUrl) => {
     const idx = allImages.indexOf(imgUrl)
@@ -88,18 +88,18 @@ const ProjectDetail = () => {
   if (!project) {
     return (
       <div className="min-h-screen pt-28 pb-16 flex flex-col justify-center items-center px-4">
-        <h2 className="text-2xl font-bold mb-4">{t('ไม่พบข้อมูลโปรเจกต์', 'Project not found')}</h2>
+        <h2 className="text-2xl font-bold mb-4">{t('projectDetail.projectNotFound')}</h2>
         <button 
           onClick={() => navigate('/')}
           className="px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-white rounded-xl transition-colors font-semibold"
         >
-          {t('กลับสู่หน้าแรก', 'Back to Home')}
+          {t('projectDetail.backToHome')}
         </button>
       </div>
     )
   }
 
-  const featuresList = project.features[language] || project.features.en || []
+  const featuresList = t(project.features, { returnObjects: true }) || []
 
   return (
     <div className="pt-28 pb-20 min-h-screen">
@@ -113,7 +113,7 @@ const ProjectDetail = () => {
           className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-xl bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 text-slate-800 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-700 transition-colors shadow-lg cursor-pointer text-sm font-semibold"
         >
           <ArrowLeft className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-          {t('กลับหน้าผลงาน', 'Back to Projects')}
+          {t('projectDetail.backToProjects')}
         </motion.button>
 
         {/* Project Container */}
@@ -130,7 +130,7 @@ const ProjectDetail = () => {
           >
             <img 
               src={project.image} 
-              alt={project.title[language] || project.title.en}
+              alt={t(project.title)}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
@@ -138,13 +138,13 @@ const ProjectDetail = () => {
             {/* Zoom Hint Overlay */}
             <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-900/90 backdrop-blur-xs text-cyan-300 px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 border border-slate-700 shadow-xl">
               <ZoomIn className="w-4 h-4 text-cyan-400" />
-              <span>{t('คลิกเพื่อขยายภาพ', 'Click to enlarge')}</span>
+              <span>{t('projectDetail.clickToEnlarge')}</span>
             </div>
 
             {/* Category Tag Overlay */}
             <div className="absolute bottom-6 left-8">
               <span className="px-3.5 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-cyan-300 bg-slate-900/90 border border-cyan-500/40 rounded-full shadow-lg">
-                {project.categoryLabel[language] || project.categoryLabel.en}
+                {t(project.categoryLabel)}
               </span>
             </div>
           </div>
@@ -155,17 +155,17 @@ const ProjectDetail = () => {
             {/* Title & Description */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-slate-900 dark:text-white tracking-tight">
-                {project.title[language] || project.title.en}
+                {t(project.title)}
               </h1>
               <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg font-light leading-relaxed">
-                {(project.fullDescription && project.fullDescription[language]) || project.description[language] || project.description.en}
+                {(project.fullDescription && t(project.fullDescription)) || t(project.description)}
               </p>
             </div>
 
             {/* Tech Stack */}
             <div className="space-y-4">
               <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <Code className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('เทคโนโลยีที่ใช้', 'Technologies Used')}
+                <Code className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('projectDetail.technologiesUsed')}
               </h3>
               <div className="flex flex-wrap gap-2.5">
                 {project.tags.map((tag) => (
@@ -183,7 +183,7 @@ const ProjectDetail = () => {
             {featuresList.length > 0 && (
               <div className="space-y-4">
                 <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 dark:text-emerald-400" /> {t('ภาพรวม & ไฮไลท์ของระบบ', 'Key Features & Highlights')}
+                  <CheckCircle className="w-4 h-4 text-emerald-500 dark:text-emerald-400" /> {t('projectDetail.keyFeaturesHighlights')}
                 </h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {featuresList.map((feat, idx) => (
@@ -203,17 +203,17 @@ const ProjectDetail = () => {
                 {/* Section Subtitle */}
                 <div className="text-center md:text-left max-w-3xl">
                   <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center justify-center md:justify-start gap-2 mb-2">
-                    <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('เจาะลึกรายละเอียดทุกหน้าจอระบบ', 'System Screens Walkthrough & Modules')}
+                    <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" /> {t('projectDetail.systemScreensWalkthroughModules')}
                   </h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm font-light leading-relaxed">
-                    {t('รายละเอียดและฟังก์ชันการทำงานของแต่ละหน้าจอในโปรเจกต์นี้', 'Detailed explanation and key capabilities for each system screen in this project.')}
+                    {t('projectDetail.detailedExplanationAndKeyCapabilitiesFor')}
                   </p>
                 </div>
 
                 <div className="space-y-12">
                   {project.modules.map((mod, idx) => {
                     const isEven = idx % 2 === 0
-                    const moduleFeatures = mod.features[language] || mod.features.en || []
+                    const moduleFeatures = t(mod.features, { returnObjects: true }) || []
 
                     return (
                       <div 
@@ -229,13 +229,13 @@ const ProjectDetail = () => {
                             <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-950">
                               <img 
                                 src={mod.image} 
-                                alt={mod.title[language] || mod.title.en}
+                                alt={t(mod.title)}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                               />
                               <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
                                 <span className="px-4 py-2 rounded-xl bg-slate-900/90 border border-cyan-500/40 text-cyan-300 text-xs font-semibold flex items-center gap-2 shadow-xl">
                                   <ZoomIn className="w-4 h-4 text-cyan-400" />
-                                  {t('ขยายภาพ & คำอธิบาย', 'Enlarge & View Explanation')}
+                                  {t('projectDetail.enlargeViewExplanation')}
                                 </span>
                               </div>
                             </div>
@@ -245,10 +245,10 @@ const ProjectDetail = () => {
                         {/* Text side - takes 6 cols */}
                         <div className="lg:col-span-6 space-y-4">
                           <h4 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white">
-                            {mod.title[language] || mod.title.en}
+                            {t(mod.title)}
                           </h4>
                           <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base font-light leading-relaxed">
-                            {mod.description[language] || mod.description.en}
+                            {t(mod.description)}
                           </p>
 
                           {/* Features List */}
@@ -276,10 +276,10 @@ const ProjectDetail = () => {
               <div className="space-y-6 pt-10 border-t border-slate-800/60">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Images className="w-4 h-4 text-cyan-400" /> {t('ภาพตัวอย่างระบบทั้งหมด', 'System Screenshots Gallery')}
+                    <Images className="w-4 h-4 text-cyan-400" /> {t('projectDetail.systemScreenshotsGallery')}
                   </h3>
                   <span className="text-xs text-slate-500 font-mono">
-                    {t(`คลิกที่ภาพเพื่อขยายและอ่านคำอธิบายทุกหน้าจอ (${allImages.length} ภาพ)`, `Click to view full image & detailed screen breakdown (${allImages.length} items)`)}
+                    {t('projectDetail.clickToViewFullImageDetailed', { count: allImages.length })}
                   </span>
                 </div>
 
@@ -312,7 +312,7 @@ const ProjectDetail = () => {
                         {/* Title label under thumbnail */}
                         <div className="p-3 bg-slate-900/90 text-left border-t border-slate-800/80">
                           <p className="text-xs font-semibold text-slate-200 line-clamp-1 group-hover:text-cyan-300 transition-colors">
-                            {matchingModule ? (matchingModule.title[language] || matchingModule.title.en) : `${t('หน้าจอที่', 'Screen')} ${idx + 1}`}
+                            {matchingModule ? (t(matchingModule.title)) : `${t('projectDetail.screen')} ${idx + 1}`}
                           </p>
                         </div>
                       </motion.div>
@@ -327,11 +327,11 @@ const ProjectDetail = () => {
               <div className="space-y-6 pt-10 border-t border-slate-800/60">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Video className="w-4 h-4 text-cyan-400" /> {project.videoTitle ? (project.videoTitle[language] || project.videoTitle.en) : t('วิดีโอสาธิตการทำงาน', 'Demo Video')}
+                    <Video className="w-4 h-4 text-cyan-400" /> {project.videoTitle ? (t(project.videoTitle)) : t('projectDetail.demoVideo')}
                   </h3>
                   <span className="text-xs text-slate-500 font-mono flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    {t('AI Model Real-Time Inference Result', 'AI Model Real-Time Inference Result')}
+                    {t('projectDetail.aiModelRealTimeInferenceResult')}
                   </span>
                 </div>
 
@@ -344,17 +344,17 @@ const ProjectDetail = () => {
                       src={project.video}
                       className="w-full h-full object-contain"
                     >
-                      {t('เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ HTML5', 'Your browser does not support HTML5 video.')}
+                      {t('projectDetail.yourBrowserDoesNotSupportHtml5')}
                     </video>
                   </div>
 
                   {project.videoDescription && (
                     <div className="p-4 sm:p-5 bg-slate-900/90 border-t border-slate-800/80 text-left space-y-1">
                       <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-400">
-                        {t('รายละเอียดวิดีโอสาธิตผลลัพธ์', 'Video Demonstration Breakdown')}
+                        {t('projectDetail.videoDemonstrationBreakdown')}
                       </h4>
                       <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                        {project.videoDescription[language] || project.videoDescription.en}
+                        {t(project.videoDescription)}
                       </p>
                     </div>
                   )}
@@ -365,7 +365,7 @@ const ProjectDetail = () => {
             {/* Code Repository Actions */}
             <div className="pt-8 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
               <div className="text-xs text-slate-500 font-light">
-                {t('พัฒนาขึ้นเพื่อจัดแสดงทักษะด้านเว็บเทคโนโลยี', 'Developed as part of a Web Technologies Showcase.')}
+                {t('projectDetail.developedAsPartOfAWeb')}
               </div>
 
               {project.github && (
@@ -376,7 +376,7 @@ const ProjectDetail = () => {
                   className="inline-flex items-center gap-2 px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-slate-850 hover:bg-slate-800 border border-slate-700 rounded-xl transition-all shadow-md hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <Github className="w-4.5 h-4.5 text-cyan-400" />
-                  {t('ดูซอร์สโค้ดบน GitHub', 'View GitHub Source')}
+                  {t('projectDetail.viewGithubSource')}
                 </a>
               )}
             </div>
@@ -406,14 +406,14 @@ const ProjectDetail = () => {
                 <div className="flex items-center gap-2 text-slate-300 text-xs sm:text-sm font-medium font-mono">
                   <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
                   <span>
-                    {t('คำอธิบายหน้าจอที่', 'Screen Details')} {currentImageIndex + 1} / {allImages.length}
+                    {t('projectDetail.screenDetails')} {currentImageIndex + 1} / {allImages.length}
                   </span>
                 </div>
 
                 <button
                   onClick={() => setIsModalOpen(false)}
                   className="p-2 rounded-xl bg-slate-800/80 hover:bg-red-500/20 hover:text-red-400 text-slate-300 border border-slate-700 transition-colors cursor-pointer"
-                  title={t('ปิด (Esc)', 'Close (Esc)')}
+                  title={t('projectDetail.closeEsc')}
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -443,7 +443,7 @@ const ProjectDetail = () => {
                         setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1))
                       }}
                       className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-slate-900/90 text-slate-200 hover:text-white hover:bg-cyan-500 hover:border-cyan-400 border border-slate-700 shadow-2xl transition-all cursor-pointer group"
-                      title={t('รูปก่อนหน้า', 'Previous')}
+                      title={t('projectDetail.previous')}
                     >
                       <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
                     </button>
@@ -454,7 +454,7 @@ const ProjectDetail = () => {
                         setCurrentImageIndex((prev) => (prev === allImages.length - 1 ? 0 : prev + 1))
                       }}
                       className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-slate-900/90 text-slate-200 hover:text-white hover:bg-cyan-500 hover:border-cyan-400 border border-slate-700 shadow-2xl transition-all cursor-pointer group"
-                      title={t('รูปถัดไป', 'Next')}
+                      title={t('projectDetail.next')}
                     >
                       <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
                     </button>
