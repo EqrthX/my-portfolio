@@ -331,50 +331,55 @@
     "toolsFrameworksAndMethodologiesILeverage": "เครื่องมือ เฟรมเวิร์ก และระเบียบวิธีที่ผมเลือกใช้เพื่อสร้างแอปพลิเคชันที่มีประสิทธิภาพ"
   },
   "timeline": {
-    "year12022": "ปีที่ 1 (2022)",
-    "firstLinesOfCode": "เริ่มต้นเขียนโค้ดบรรทัดแรก",
-    "foundations": "พื้นฐาน",
-    "startedMyProgrammingJourneyInUniversity": "เริ่มต้นเส้นทางการเขียนโปรแกรมในมหาวิทยาลัย เรียนรู้พื้นฐาน HTML, CSS, JavaScript และ logic การเขียนโปรแกรม ก่อนจะสัมผัส PHP เป็นภาษาแรกสำหรับ server-side",
-    "html5Css3JavascriptFundamentals": "พื้นฐาน HTML5, CSS3 และ JavaScript",
-    "basicPhpFirstStepToBackend": "PHP พื้นฐาน — ก้าวแรกสู่ backend development",
-    "introductionToMysqlDatabaseDesign": "MySQL & การออกแบบฐานข้อมูลเบื้องต้น",
-    "familiarizationWithGitVersionControl": "เริ่มคุ้นเคยกับ Git & การควบคุมเวอร์ชัน",
-    "year22023": "ปีที่ 2 (2023)",
-    "fullStackWebAndroidDevelopment": "การพัฒนาเว็บ Full-Stack & แอป Android",
-    "projectBasedLearning": "การเรียนรู้ผ่านโปรเจกต์",
-    "builtMyFirstRealProjectsRanging": "ลงมือสร้าง project จริงครั้งแรก — ตั้งแต่ E-Commerce web app ด้วย PHP/MySQL ไปจนถึง Android app สำหรับ mobile platform ฝึก OOP และ database relationship จริงๆ",
-    "builtECommerceWebAppWith": "สร้าง E-Commerce web app ด้วย PHP + MySQL ตั้งแต่ login, ตะกร้าสินค้า, ไปจนถึงการชำระเงิน",
-    "developedAndroidMobileAppBookloverWith": "พัฒนา Android mobile app (BooKLover) ด้วย Java + SQLite",
-    "designedRelationalDatabaseSchemasAndNormalization": "ออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์และการทำ Normalization",
-    "learnedRestApiConceptsAndHttp": "เรียนรู้แนวคิด REST API และ HTTP methods",
-    "year32024": "ปีที่ 3 (2024)",
-    "nodeJsReactModernBackend": "Node.js, React & ระบบหลังบ้านสมัยใหม่",
-    "frameworkMastery": "ความเชี่ยวชาญด้านเฟรมเวิร์ก",
-    "movedToTheModernJavascriptStack": "ก้าวสู่ modern JavaScript stack — เริ่มใช้ Node.js + Express สร้าง REST API พร้อม ORM และเรียนรู้ React สำหรับ dynamic frontend ที่ซับซ้อนขึ้น รวมถึง SQL Server สำหรับ enterprise-grade database",
-    "createdNodeJsExpressRestApis": "สร้าง Node.js + Express REST API พร้อมระบบกรองข้อมูล ยืนยันตัวตน และดักจับข้อผิดพลาด",
-    "usedSequelizeOrmSqlServerFor": "ใช้ Sequelize ORM & SQL Server สำหรับโปรเจกต์ระดับองค์กร",
-    "masteredReactHooksContextComponentArchitecture": "ใช้ React (Hooks, Context, สถาปัตยกรรมคอมโพเนนต์) + Tailwind CSS",
-    "utilizedSupabaseServerlessBackendWithPostgresql": "ใช้ Supabase — ระบบหลังบ้านแบบ Serverless ร่วมกับ PostgreSQL",
-    "year3420242025": "ปีที่ 3–4 (2024–2025)",
-    "aiComputerVisionPythonBackend": "AI / คอมพิวเตอร์วิทัศน์ & หลังบ้านด้วย Python",
-    "emergingTechnologies": "เทคโนโลยีใหม่",
-    "expandedMyHorizonToAiAnd": "ขยายขอบเขตสู่ AI และ Computer Vision — ใช้ Python + FastAPI สร้าง backend สำหรับโมเดล ML และนำ YOLO + Roboflow มาใช้ real-time object detection ในโปรเจกต์จริง",
-    "builtHighPerformanceAsyncApisWith": "สร้าง async API ประสิทธิภาพสูงด้วย Python + FastAPI สำหรับประมวลผลโมเดล ML",
-    "implementedYoloV8V11ObjectDetection": "ตรวจจับวัตถุด้วย YOLO (v8/v11) & จัดการชุดข้อมูลด้วย Roboflow",
-    "trainedCustomMlModelsWithCustom": "เทรนโมเดลเฉพาะทางด้วยชุดข้อมูลที่สร้างขึ้นเอง",
-    "learnedCNetEnterpriseOopAnd": "ใช้ C# .NET — เรียนรู้ OOP ระดับองค์กรและ Windows Application",
-    "present2025": "ปัจจุบัน (2025)",
-    "cloudDevopsProductionReadyApps": "คลาวด์, DevOps & แอปพลิเคชันที่พร้อมใช้งานจริง",
-    "cloudDevops": "คลาวด์ & DevOps",
-    "aimingAtDeployingProductionGradeApplications": "มุ่งสู่การ deploy application ระดับ production จริงๆ — ใช้ Docker containerize services, Azure cloud สำหรับ hosting และ scaling รวมถึง design system ที่สวยงามและ UX ที่ดีสำหรับ end user",
-    "usedDockerToContainerizeApplicationsAnd": "ใช้ Docker ในการแพ็กแอปพลิเคชันและจัดการบริการต่างๆ",
-    "microsoftAzureCloudHostingAppServices": "ใช้ Microsoft Azure — การติดตั้งแอปขึ้นคลาวด์, App Service & พื้นที่เก็บข้อมูล",
-    "builtProductionGradePortfolioUsingReact": "สร้างพอร์ตโฟลิโอพร้อมใช้งานจริงด้วย React 19 + Vite + Tailwind v4",
-    "exploringCiCdPipelinesAndCloud": "ศึกษาเพิ่มเติมในส่วนของ CI/CD pipeline และสถาปัตยกรรมแบบ Cloud-native",
     "milestonesExperience": "เหตุการณ์สำคัญ & ประสบการณ์",
     "developer": "เส้นทางนัก",
     "journey": "พัฒนา",
-    "myEducationalBackgroundKeyAchievementsAnd": "ประวัติการศึกษา ความสำเร็จที่สำคัญ และการพัฒนาความรู้อย่างต่อเนื่องของผม"
+    "subtitle": "เส้นทางการเรียนรู้ตลอด 4 ปีในมหาวิทยาลัย ตั้งแต่พื้นฐานการเขียนโปรแกรม สู่การพัฒนา Full Stack และ Web App ที่นำ ML มาใช้",
+    "years": {
+      "year1": {
+        "period": "ปีที่ 1",
+        "title": "พื้นฐาน Programming & Network",
+        "type": "พื้นฐาน",
+        "description": "เรียนรู้พื้นฐานการเขียนโปรแกรมและระบบเครือข่ายคอมพิวเตอร์ในปีแรกของมหาวิทยาลัย",
+        "highlights": [
+          "พื้นฐานการเขียนโปรแกรม",
+          "พื้นฐานระบบเครือข่ายคอมพิวเตอร์"
+        ]
+      },
+      "year2": {
+        "period": "ปีที่ 2",
+        "title": "เจาะลึก Programming, DSA & Database",
+        "type": "การเรียน & โปรเจกต์ในวิชา",
+        "description": "เรียนการเขียนโปรแกรมในเชิงลึกขึ้น ศึกษาโครงสร้างข้อมูลและอัลกอริทึม (DSA) เริ่มเรียนพื้นฐานฐานข้อมูล และทำโปรเจกต์ด้วย PHP ตามวิชาเรียนของอาจารย์",
+        "highlights": [
+          "การเขียนโปรแกรมเชิงลึกและ DSA",
+          "พื้นฐานฐานข้อมูล",
+          "โปรเจกต์ PHP ตามวิชาเรียน"
+        ]
+      },
+      "year3": {
+        "period": "ปีที่ 3",
+        "title": "พัฒนา Full Stack — Book University",
+        "type": "โปรเจกต์ Full Stack",
+        "description": "ศึกษา Node.js และ React.js แล้วนำมาใช้พัฒนาโปรเจกต์ Full Stack ชื่อ Book University โดยใช้ React, Express, Tailwind CSS และ MySQL",
+        "highlights": [
+          "ศึกษา Node.js และ React.js",
+          "พัฒนาโปรเจกต์ Full Stack: Book University",
+          "เทคโนโลยีที่ใช้: React, Express, Tailwind CSS และ MySQL"
+        ]
+      },
+      "year4": {
+        "period": "ปีที่ 4",
+        "title": "Machine Learning ร่วมกับ Web App",
+        "type": "โปรเจกต์จบ",
+        "description": "เข้าร่วมอบรมเรื่อง Machine Learning (ML) และนำ ML มาใช้ร่วมกับ Web App ในโปรเจกต์จบ Web Detect Student Behavior",
+        "highlights": [
+          "เข้าร่วมอบรมด้าน ML",
+          "นำ ML มาใช้ร่วมกับ Web App",
+          "โปรเจกต์จบ: Web Detect Student Behavior"
+        ]
+      }
+    }
   },
   "projectDetail": {
     "systemScreen": "ภาพตัวอย่างระบบที่",

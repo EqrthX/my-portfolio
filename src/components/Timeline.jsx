@@ -1,82 +1,23 @@
 import { motion } from 'framer-motion'
-import { GraduationCap, Code2, Cpu, Cloud, Sparkles, Layers } from 'lucide-react'
+import { GraduationCap, Code2, Cpu, Sparkles, Layers } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 const Timeline = () => {
   const { t } = useTranslation()
 
   const timelineEvents = [
-    {
-      period: t('timeline.year12022'),
-      title: t('timeline.firstLinesOfCode'),
-      type: t('timeline.foundations'),
-      icon: GraduationCap,
-      color: 'cyan',
-      description: t('timeline.startedMyProgrammingJourneyInUniversity'),
-      highlights: [
-        t('timeline.html5Css3JavascriptFundamentals'),
-        t('timeline.basicPhpFirstStepToBackend'),
-        t('timeline.introductionToMysqlDatabaseDesign'),
-        t('timeline.familiarizationWithGitVersionControl')
-      ]
-    },
-    {
-      period: t('timeline.year22023'),
-      title: t('timeline.fullStackWebAndroidDevelopment'),
-      type: t('timeline.projectBasedLearning'),
-      icon: Code2,
-      color: 'indigo',
-      description: t('timeline.builtMyFirstRealProjectsRanging'),
-      highlights: [
-        t('timeline.builtECommerceWebAppWith'),
-        t('timeline.developedAndroidMobileAppBookloverWith'),
-        t('timeline.designedRelationalDatabaseSchemasAndNormalization'),
-        t('timeline.learnedRestApiConceptsAndHttp')
-      ]
-    },
-    {
-      period: t('timeline.year32024'),
-      title: t('timeline.nodeJsReactModernBackend'),
-      type: t('timeline.frameworkMastery'),
-      icon: Layers,
-      color: 'violet',
-      description: t('timeline.movedToTheModernJavascriptStack'),
-      highlights: [
-        t('timeline.createdNodeJsExpressRestApis'),
-        t('timeline.usedSequelizeOrmSqlServerFor'),
-        t('timeline.masteredReactHooksContextComponentArchitecture'),
-        t('timeline.utilizedSupabaseServerlessBackendWithPostgresql')
-      ]
-    },
-    {
-      period: t('timeline.year3420242025'),
-      title: t('timeline.aiComputerVisionPythonBackend'),
-      type: t('timeline.emergingTechnologies'),
-      icon: Cpu,
-      color: 'fuchsia',
-      description: t('timeline.expandedMyHorizonToAiAnd'),
-      highlights: [
-        t('timeline.builtHighPerformanceAsyncApisWith'),
-        t('timeline.implementedYoloV8V11ObjectDetection'),
-        t('timeline.trainedCustomMlModelsWithCustom'),
-        t('timeline.learnedCNetEnterpriseOopAnd')
-      ]
-    },
-    {
-      period: t('timeline.present2025'),
-      title: t('timeline.cloudDevopsProductionReadyApps'),
-      type: t('timeline.cloudDevops'),
-      icon: Cloud,
-      color: 'sky',
-      description: t('timeline.aimingAtDeployingProductionGradeApplications'),
-      highlights: [
-        t('timeline.usedDockerToContainerizeApplicationsAnd'),
-        t('timeline.microsoftAzureCloudHostingAppServices'),
-        t('timeline.builtProductionGradePortfolioUsingReact'),
-        t('timeline.exploringCiCdPipelinesAndCloud')
-      ]
-    }
-  ]
+    { id: 'year1', icon: GraduationCap, color: 'cyan' },
+    { id: 'year2', icon: Code2, color: 'indigo' },
+    { id: 'year3', icon: Layers, color: 'violet' },
+    { id: 'year4', icon: Cpu, color: 'fuchsia' },
+  ].map(event => ({
+    ...event,
+    period: t(`timeline.years.${event.id}.period`),
+    title: t(`timeline.years.${event.id}.title`),
+    type: t(`timeline.years.${event.id}.type`),
+    description: t(`timeline.years.${event.id}.description`),
+    highlights: t(`timeline.years.${event.id}.highlights`, { returnObjects: true }),
+  }))
 
   return (
     <section id="timeline" className="relative py-24 min-h-screen flex flex-col justify-center items-center">
@@ -96,7 +37,7 @@ const Timeline = () => {
             {t('timeline.developer')}<span className="text-gradient">{t('timeline.journey')}</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg font-light">
-            {t('timeline.myEducationalBackgroundKeyAchievementsAnd')}
+            {t('timeline.subtitle')}
           </p>
         </div>
 
@@ -114,7 +55,7 @@ const Timeline = () => {
             const c = colorMap[item.color] || colorMap.cyan
             return (
               <motion.div
-                key={index}
+                key={item.id}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}

@@ -332,50 +332,55 @@
     "toolsFrameworksAndMethodologiesILeverage": "Tools, frameworks, and methodologies I leverage to build robust software applications."
   },
   "timeline": {
-    "year12022": "Year 1 (2022)",
-    "firstLinesOfCode": "First Lines of Code",
-    "foundations": "Foundations",
-    "startedMyProgrammingJourneyInUniversity": "Started my programming journey in university. Learned foundations of HTML, CSS, JavaScript, and programming logic, before touching PHP as the first server-side language.",
-    "html5Css3JavascriptFundamentals": "HTML5, CSS3 & JavaScript fundamentals",
-    "basicPhpFirstStepToBackend": "Basic PHP — first step to backend development",
-    "introductionToMysqlDatabaseDesign": "Introduction to MySQL & database design",
-    "familiarizationWithGitVersionControl": "Familiarization with Git & version control",
-    "year22023": "Year 2 (2023)",
-    "fullStackWebAndroidDevelopment": "Full-Stack Web & Android Development",
-    "projectBasedLearning": "Project-Based Learning",
-    "builtMyFirstRealProjectsRanging": "Built my first real projects—ranging from an E-Commerce web app with PHP/MySQL to an Android mobile app, practicing OOP and database relationships in real scenarios.",
-    "builtECommerceWebAppWith": "Built E-Commerce web app with PHP + MySQL covering login, shopping cart, and payment flow",
-    "developedAndroidMobileAppBookloverWith": "Developed Android mobile app (BooKLover) with Java + SQLite",
-    "designedRelationalDatabaseSchemasAndNormalization": "Designed relational database schemas and normalization",
-    "learnedRestApiConceptsAndHttp": "Learned REST API concepts and HTTP methods",
-    "year32024": "Year 3 (2024)",
-    "nodeJsReactModernBackend": "Node.js, React & Modern Backend",
-    "frameworkMastery": "Framework Mastery",
-    "movedToTheModernJavascriptStack": "Moved to the modern JavaScript stack—started using Node.js + Express to build REST APIs with ORM, learned React for complex dynamic frontends, and SQL Server for enterprise-grade databases.",
-    "createdNodeJsExpressRestApis": "Created Node.js + Express REST APIs with middleware, auth, and error handling",
-    "usedSequelizeOrmSqlServerFor": "Used Sequelize ORM & SQL Server for enterprise projects",
-    "masteredReactHooksContextComponentArchitecture": "Mastered React (Hooks, Context, component architecture) + Tailwind CSS",
-    "utilizedSupabaseServerlessBackendWithPostgresql": "Utilized Supabase—Serverless backend with PostgreSQL",
-    "year3420242025": "Year 3–4 (2024–2025)",
-    "aiComputerVisionPythonBackend": "AI / Computer Vision & Python Backend",
-    "emergingTechnologies": "Emerging Technologies",
-    "expandedMyHorizonToAiAnd": "Expanded my horizon to AI and Computer Vision—used Python + FastAPI to build ML inference backends, and implemented YOLO + Roboflow for real-time object detection in projects.",
-    "builtHighPerformanceAsyncApisWith": "Built high-performance async APIs with Python + FastAPI for ML model inference",
-    "implementedYoloV8V11ObjectDetection": "Implemented YOLO (v8/v11) object detection & Roboflow dataset management",
-    "trainedCustomMlModelsWithCustom": "Trained custom ML models with custom-annotated datasets",
-    "learnedCNetEnterpriseOopAnd": "Learned C# .NET—enterprise OOP and Windows application development",
-    "present2025": "Present (2025)",
-    "cloudDevopsProductionReadyApps": "Cloud, DevOps & Production-Ready Apps",
-    "cloudDevops": "Cloud & DevOps",
-    "aimingAtDeployingProductionGradeApplications": "Aiming at deploying production-grade applications—using Docker to containerize services, Azure cloud for hosting and scaling, and designing elegant interfaces with good UX.",
-    "usedDockerToContainerizeApplicationsAnd": "Used Docker to containerize applications and manage services",
-    "microsoftAzureCloudHostingAppServices": "Microsoft Azure—cloud hosting, App Services & blob storage",
-    "builtProductionGradePortfolioUsingReact": "Built production-grade portfolio using React 19 + Vite + Tailwind v4",
-    "exploringCiCdPipelinesAndCloud": "Exploring CI/CD pipelines and cloud-native architecture",
     "milestonesExperience": "Milestones & Experience",
     "developer": "Developer ",
     "journey": "Journey",
-    "myEducationalBackgroundKeyAchievementsAnd": "My educational background, key achievements, and continuous learning progression."
+    "subtitle": "My learning journey through four years of university, from programming fundamentals to full stack development and an ML web application.",
+    "years": {
+      "year1": {
+        "period": "Year 1",
+        "title": "Programming & Network Fundamentals",
+        "type": "Foundations",
+        "description": "Studied programming fundamentals and computer networks in the first year of university.",
+        "highlights": [
+          "Programming fundamentals",
+          "Computer network fundamentals"
+        ]
+      },
+      "year2": {
+        "period": "Year 2",
+        "title": "Programming, DSA & Databases",
+        "type": "Coursework & Projects",
+        "description": "Studied programming in greater depth, learned data structures and algorithms (DSA) and database fundamentals, and built a PHP project as part of coursework.",
+        "highlights": [
+          "Further programming study and DSA",
+          "Database fundamentals",
+          "PHP project for a university course"
+        ]
+      },
+      "year3": {
+        "period": "Year 3",
+        "title": "Full Stack Development — Book University",
+        "type": "Full Stack Project",
+        "description": "Studied Node.js and React.js and applied them to Book University, a full stack project using React, Express, Tailwind CSS and MySQL.",
+        "highlights": [
+          "Studied Node.js and React.js",
+          "Built the Book University full stack project",
+          "Tech stack: React, Express, Tailwind CSS and MySQL"
+        ]
+      },
+      "year4": {
+        "period": "Year 4",
+        "title": "Machine Learning & Web Applications",
+        "type": "Final Year Project",
+        "description": "Attended machine learning (ML) training and applied ML in a web application for the final year project, Web Detect Student Behavior.",
+        "highlights": [
+          "Attended ML training",
+          "Combined ML with a web application",
+          "Final year project: Web Detect Student Behavior"
+        ]
+      }
+    }
   },
   "projectDetail": {
     "systemScreen": "System Screen",
